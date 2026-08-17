@@ -7,7 +7,7 @@ import { PricingData } from "./PricingCardData"
 
 const PricingCard = (className = "") => {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full px-5 md:px-45 gap-8">
+        <div className="grid grid-cols-1  lg:grid-cols-3 w-full px-0 md:px-45 gap-8">
             {
                 PricingData.map((card) => {
                     return (

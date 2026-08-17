@@ -1,26 +1,10 @@
 import GlassCard from '../../../components/Layout/GlassEffect'
 import { Typography } from '../../../styles/Font'
 import { Colors } from '../../../styles/Color'
-import checked from "../../../assets/Checked.svg"
-import insight from "../../../assets/Insight.png"
-import TextFile from "../../../assets/TextFile.svg"
-import critical from "../../../assets/critical.png"
-
-const data = [
-    { id: 1, title: "Instant Entity Extraction Validation", body: "Verify that dates, skills, and titles are correctly  parsed without data loss." },
-    { id: 2, title: "Action Verb Density Scoring", body: "Ensure your bullet points lead with high-impact, results-oriented phrasing." },
-    { id: 3, title: "Formatting Red Flag Alerts", body: "Detect multi-column layouts or complex graphics that break legacy scanners." }
-]
-
-const scoreStats = [
-    { id: 1, label: "Keyword Match", value: "92" },
-    { id: 2, label: "Action Verbs", value: "68" },
-    { id: 3, label: "Readability", value: "88" },
-]
 
 const Mission = () => {
     return (
-        <div className="w-full px-5 sm:px-6 lg:px-10">
+        <div className="w-full">
 
             <div className="w-full">
 

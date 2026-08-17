@@ -10,7 +10,7 @@ export const Features = () => {
     return (
         <div className="flex flex-col gap-[70px] lg:gap-[115px] min:h-screen w-full" style={{ backgroundColor: Colors.primary }}>
             <Navbar />
-            <div className="flex flex-col gap-[70px] lg:gap-[115px] px-4">
+            <div className="flex flex-col gap-[70px] lg:gap-[115px]">
                 <div className="pt-[85px] lg:pt-[110px]">
                     <HeroHeading
                         tag="PLATFORM FEATURES"

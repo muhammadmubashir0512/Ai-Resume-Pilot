@@ -1,4 +1,3 @@
-import FeturedData from "./FeaturedData";
 import { Colors } from "../../../styles/Color";
 import GlassCard from "../../../components/Layout/GlassEffect";
 import { Typography } from "../../../styles/Font";
@@ -28,21 +27,3 @@ const FeaturedCard = ({ Features, limit, className = "" }) => {
 
 export default FeaturedCard
 
-// {
-//     isOpen ? (
-//         <div className="flex flex-col gap-4">
-//             <div className="flex flex-row items-center justify-between">
-//                 <p className={`${Typography.subheading}`} style={{ color: Colors.textbody }}>{card.question}</p>
-//                 <img src={arrowUp} alt="" onClick={() => setIsOpen(!isOpen)} />
-//             </div>
-//             <div className="border border-white/20 w-full">
-//                 <p className={`${Typography.body}`} style={{ color: Colors.textbody }}>{card.answer}</p>
-//             </div>
-//         </div>
-//     ) : (
-//         <div className="flex flex-row items-center justify-between">
-//             <p className={`${Typography.subheading}`} style={{ color: Colors.textbody }}>{card.question}</p>
-//             <img src={arrowDown} alt="" onClick={() => setIsOpen(!isOpen)} />
-//         </div>
-//     )
-// }

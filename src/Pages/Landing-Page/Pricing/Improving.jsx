@@ -6,7 +6,7 @@ import Arrow from "../../../assets/Arrow.svg"
 
 const Improving = () => {
     return (
-        <div className='w-full px-5 md:px-45'>
+        <div className='w-full  px-[24px] lg:px-[40px]'>
             <GlassCard padding='p-12'>
                 <div className='flex flex-col gap-4 md:gap-5 justify-center items-center'>
                     <p className={`${Typography.subheading}`} style={{ color: Colors.textbody }}>Start improving your resume today</p>

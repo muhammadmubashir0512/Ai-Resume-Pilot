@@ -14,7 +14,7 @@ const FAQCard = ({ className = "", FaqData, start = 0, end }) => {
     }
 
     return (
-        <div className="flex flex-col w-full px-5 lg:px-75 gap-4">
+        <div className="flex flex-col w-full px-0 md:px-30 lg:px-60  gap-4">
             {data.map((card) => {
                 const isOpen = openId === card.id
 

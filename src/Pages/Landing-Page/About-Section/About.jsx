@@ -8,7 +8,7 @@ import Started from './StaredWith'
 
 export const About = () => {
     return (
-        <div className="flex flex-col gap-[70px] lg:gap-[115px] min:h-screen min:h-screen w-full" style={{ backgroundColor: Colors.primary }}>
+        <div className="flex flex-col gap-[70px] lg:gap-[115px] min:h-screen w-full" style={{ backgroundColor: Colors.primary }}>
             <Navbar />
             <div className='flex flex-col gap-[70px] lg:gap-[115px] px-4'>
                 <div className="pt-[85px] lg:pt-[110px]">
@@ -21,6 +21,8 @@ export const About = () => {
                         description="We're on a mission to democratize access to world-class career guidance using intelligent precision and cutting-edge AI technology."
                     />
                 </div>
+            </div>
+            <div className="w-full px-[24px] lg:px-[40px] flex flex-col gap-[70px] lg:gap-[115px]">
                 <Mission />
                 <Principle />
                 <Started />
