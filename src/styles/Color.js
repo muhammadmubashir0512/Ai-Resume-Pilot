@@ -1,0 +1,17 @@
+export const Colors = {
+  primary: "#0B1326",
+  primaryTransparent: "rgba(11, 19, 38, 0.8)",
+  secondary: "#4f46e5",
+  danger: "#dc2626",
+  success: "#16a34a",
+  warning: "#f59e0b",
+  background: "#f9fafb",
+  text: "#C7C4D7",
+  textLight: "#6b7280",
+  border: "#e5e7eb",
+  inputs: "#171F33",
+  light: "#C0C1FF",
+  progressCircle: "#4CD7F6",
+  textbody: "#DAE2FD",
+  linearGradient: "linear-gradient(135deg, #C0C1FF 0%, #737499 100%)",
+};
