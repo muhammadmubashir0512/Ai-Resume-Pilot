@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Pricing from './Pages/Landing-Page/Pricing/Pricing'
 import { About } from './Pages/Landing-Page/About-Section/About'
 import LandingPage from './Pages/Landing-Page/LandingPage'
+import Signup from './Pages/auth/Signup'
+import Login from './Pages/auth/Login'
 
 function App() {
 
@@ -22,6 +24,14 @@ function App() {
     {
       path: "/about",
       element: <About />
+    },
+    {
+      path: "/signup",
+      element: <Signup />
+    },
+    {
+      path: "/login",
+      element: <Login />
     }
   ])
 

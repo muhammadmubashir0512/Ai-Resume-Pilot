@@ -54,7 +54,7 @@ const Navbar = () => {
             </div>
 
             {/* Get Started */}
-            <Button variant="light" size="md" rounded="rounded-full" className="hidden lg:flex cursor-pointer">
+            <Button variant="light" size="md" rounded="rounded-full" className="hidden lg:flex cursor-pointer" onClick={() => navigate('/signup')}>
                 Get Started
             </Button>
 
@@ -96,7 +96,7 @@ const Navbar = () => {
                         </div>
 
                         {/* Get Started */}
-                        <Button variant="light" size="md" rounded="rounded-full" className="cursor-pointer">
+                        <Button variant="light" size="md" rounded="rounded-full" className="cursor-pointer" onClick={() => navigate('/signup')}>
                             Get Started
                         </Button>
 

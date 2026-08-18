@@ -22,7 +22,7 @@
   }
 
   .glass-card {
-    @apply bg-white/3 backdrop-blur-md border border-white/10 rounded-2xl shadow-lg;
+    @apply bg-white/3 backdrop-blur-md border border-white/10  shadow-lg;
   }
 
 }

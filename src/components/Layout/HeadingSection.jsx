@@ -31,12 +31,13 @@ const HeroHeading = ({
                     <span key={index}>
                         {part.gradient ? (
                             <span
-                                style={{
-                                    backgroundImage: Colors.linearGradient,
-                                    WebkitBackgroundClip: "text",
-                                    WebkitTextFillColor: "transparent",
-                                    backgroundClip: "text",
-                                }}
+                                className='text-[#4CD7F6]/80'
+                            // style={{
+                            //     backgroundImage: Colors.linearGradient,
+                            //     WebkitBackgroundClip: "text",
+                            //     WebkitTextFillColor: "transparent",
+                            //     backgroundClip: "text",
+                            // }}
                             >
                                 {part.text}
                             </span>

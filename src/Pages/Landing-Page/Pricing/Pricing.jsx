@@ -12,7 +12,7 @@ const Pricing = () => {
     return (
         <div className="flex flex-col gap-[70px] lg:gap-[115px] min:h-screen w-full" style={{ backgroundColor: Colors.primary }}>
             <Navbar />
-            <div className="pt-[85px] lg:pt-[110px]">
+            <div className="pt-[85px] lg:pt-[110px] px-4">
                 <HeroHeading
                     tag="SIMPLE PRICING"
                     headingParts={[
@@ -33,8 +33,8 @@ const Pricing = () => {
 
                 {/* FAQs Card */}
                 <FAQCard FaqData={FaqData} start={3} end={7} />
+                <Improving />
             </div>
-            <Improving />
 
             <Footer />
         </div>

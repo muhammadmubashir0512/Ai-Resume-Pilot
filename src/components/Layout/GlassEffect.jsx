@@ -1,6 +1,6 @@
-const GlassCard = ({ children, className = "", padding = "p-5" }) => {
+const GlassCard = ({ children, rounded = "rounded-2xl", className = "", padding = "p-5" }) => {
     return (
-        <div className={`glass-card ${padding} ${className}`}>
+        <div className={`glass-card ${padding} ${className} ${rounded}`}>
             {children}
         </div>
     )
