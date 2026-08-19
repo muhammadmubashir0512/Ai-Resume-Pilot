@@ -1,7 +1,14 @@
+import { Colors } from "../../styles/Color"
+
 const PageWrapper = ({ children, className = "" }) => {
     return (
-        <div className={`min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 ${className}`}>
-            {children}
+        <div
+            className={`min-h-screen w-full p-[24px] box-border ${className}`}
+            style={{ backgroundColor: Colors.primary }}
+        >
+            <div className="w-full max-w-full space-y-12">
+                {children}
+            </div>
         </div>
     )
 }

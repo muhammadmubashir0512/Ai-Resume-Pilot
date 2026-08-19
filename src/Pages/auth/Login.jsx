@@ -29,6 +29,9 @@ const Login = () => {
 
     const onSubmit = (userData) => {
         console.log("User Data...", userData)
+        setTimeout(() => {
+            navigate("/dashboard")
+        }, 1000);
     }
 
     return (
@@ -59,7 +62,7 @@ const Login = () => {
                             <div className="flex flex-row gap-2 items-center justify-center">
                                 <img src={google} alt="" className="w-[18px] h-[18px]" />
                                 <p className="text-sm font-medium" style={{ color: Colors.textbody }}>
-                                    Sign up with Google
+                                    Log in with Google
                                 </p>
                             </div>
                         </GlassCard>

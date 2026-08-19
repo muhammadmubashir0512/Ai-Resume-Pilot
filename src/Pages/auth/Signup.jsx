@@ -29,6 +29,9 @@ const Signup = () => {
 
     const onSubmit = (userData) => {
         console.log("User Data...", userData)
+        setTimeout(() => {
+            navigate("/dashboard")
+        }, 1000);
     }
 
     return (

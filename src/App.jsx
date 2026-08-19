@@ -5,6 +5,8 @@ import { About } from './Pages/Landing-Page/About-Section/About'
 import LandingPage from './Pages/Landing-Page/LandingPage'
 import Signup from './Pages/auth/Signup'
 import Login from './Pages/auth/Login'
+import Dashboard from './Pages/Dashboard/Dashboard'
+import PageTransition from './components/Layout/PageTransition'
 
 function App() {
 
@@ -27,11 +29,22 @@ function App() {
     },
     {
       path: "/signup",
-      element: <Signup />
+      element:
+        <PageTransition>
+          <Signup />
+        </PageTransition>
     },
     {
       path: "/login",
-      element: <Login />
+      element:
+        <PageTransition>
+          <Login />
+        </PageTransition>
+    },
+    // Protected Routes started here
+    {
+      path: "/dashboard",
+      element: <Dashboard />
     }
   ])
 

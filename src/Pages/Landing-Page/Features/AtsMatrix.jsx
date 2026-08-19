@@ -4,7 +4,7 @@ import { Colors } from '../../../styles/Color'
 import checked from "../../../assets/Checked.svg"
 import insight from "../../../assets/Insight.png"
 import TextFile from "../../../assets/TextFile.svg"
-import critical from "../../../assets/critical.png"
+import danger from "../../../assets/danger.svg"
 
 const data = [
     { id: 1, title: "Instant Entity Extraction Validation", body: "Verify that dates, skills, and titles are correctly  parsed without data loss." },
@@ -150,7 +150,7 @@ const ATSMatrix = () => {
 
                             <div className="p-4 rounded-lg border bg-[#FFB4AB]/10 border-[#FFB4AB]/20 flex flex-col gap-2">
                                 <div className='flex flex-row gap-2 items-center'>
-                                    <img src={critical} alt="" className='w-[24px] h-[24px]' />
+                                    <img src={danger} alt="" className='w-[20px] h-[20px]' />
                                     <p className='text-[#FFB4AB] font-semibold text-[14px]'>1 Critical Issue Found</p>
                                 </div>
                                 <p className='text-[12px] font-normal text-[#C7C4D7]'>The 'Education' section uses an unconventional table format which failed to parse in simulated Workday environments.</p>
