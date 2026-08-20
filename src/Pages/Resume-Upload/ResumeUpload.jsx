@@ -34,7 +34,7 @@ const ResumeUpload = () => {
             skills: []
         })
 
-        navigate("/resume-Analytics")
+        navigate("/resume-Analyzer/result")
     }
 
     return (

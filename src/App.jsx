@@ -59,7 +59,7 @@ function App() {
         </PageTransition>
     },
     {
-      path: "/resume-Analytics",
+      path: "/resume-Analyzer/result",
       element:
         <PageTransition>
           <ResumeAnalytics />

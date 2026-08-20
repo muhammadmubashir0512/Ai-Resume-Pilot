@@ -54,7 +54,6 @@ const Button = (props) => {
         disabled = false,
         className = "",
         rounded = "rounded-lg",
-
         type = "button",
     } = props
 
@@ -66,8 +65,17 @@ const Button = (props) => {
             type={type}
             disabled={disabled}
             style={style}
-            className={`flex items-center gap-2  font-medium transition-opacity duration-150 disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90 ${rounded} ${sizeClass} ${className}`}
             onClick={onClick}
+            className={`
+                flex items-center gap-2 font-medium
+                transition-transform duration-300 ease-out
+                hover:scale-[1.01]
+                active:scale-[0.995]
+                disabled:opacity-50 disabled:cursor-not-allowed
+                ${rounded}
+                ${sizeClass}
+                ${className}
+            `}
         >
             {children}
         </button>

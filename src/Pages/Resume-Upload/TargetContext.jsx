@@ -33,14 +33,14 @@ const TargetContext = ({ data, onChange, skillInput, setSkillInput }) => {
 
     return (
         <GlassCard>
-            <div className="p-3 sm:p-4 md:p-6 space-y-6 md:space-y-10">
+            <div className="p-0 sm:p-4 md:p-6 space-y-6 md:space-y-10">
 
                 <div className='flex flex-row gap-2 items-center'>
                     <div className='h-[24px] w-[5px] rounded-lg' style={{ backgroundColor: Colors.progressCircle }} />
                     <p className={`text-[24px] font-semibold`} style={{ color: Colors.textbody }}>Target Context</p>
                 </div>
 
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-40'>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10'>
 
                     {/* Full Name */}
                     <div>

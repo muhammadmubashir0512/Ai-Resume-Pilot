@@ -38,7 +38,7 @@ const DashboardNavbar = () => {
                 {/* Nav Items */}
                 <div className="hidden lg:flex flex-row gap-6 xl:gap-[28px] items-center">
                     {navItem.map((item) => {
-                        const isActive = location.pathname === item.path
+                        const isActive = location.pathname.startsWith(item.path)
                         return (
                             <div
                                 key={item.path}
@@ -93,7 +93,7 @@ const DashboardNavbar = () => {
                         {/* NavItem */}
                         <div className="flex flex-col gap-4 items-center">
                             {navItem.map((item) => {
-                                const isActive = location.pathname === item.path
+                                const isActive = location.pathname.startsWith(item.path)
                                 return (
                                     <div
                                         key={item.path}
