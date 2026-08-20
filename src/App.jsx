@@ -7,6 +7,8 @@ import Signup from './Pages/auth/Signup'
 import Login from './Pages/auth/Login'
 import Dashboard from './Pages/Dashboard/Dashboard'
 import PageTransition from './components/Layout/PageTransition'
+import ResumeUpload from './Pages/Resume-Upload/ResumeUpload'
+import ResumeAnalytics from './Pages/Resume-Analytics/ResumeAnalytics'
 
 function App() {
 
@@ -44,7 +46,24 @@ function App() {
     // Protected Routes started here
     {
       path: "/dashboard",
-      element: <Dashboard />
+      element:
+        <PageTransition>
+          <Dashboard />
+        </PageTransition>
+    },
+    {
+      path: "/resume-Analyzer",
+      element:
+        <PageTransition>
+          <ResumeUpload />
+        </PageTransition>
+    },
+    {
+      path: "/resume-Analytics",
+      element:
+        <PageTransition>
+          <ResumeAnalytics />
+        </PageTransition>
     }
   ])
 

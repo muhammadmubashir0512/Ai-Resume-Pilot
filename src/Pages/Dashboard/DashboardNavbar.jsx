@@ -8,7 +8,7 @@ import profile from "../../assets/profile.svg"
 
 const navItem = [
     { label: "Dashboard", path: "/dashboard" },
-    { label: "Resume Analyzer", path: "/Resume-Analyzer" },
+    { label: "Resume Analyzer", path: "/resume-Analyzer" },
     { label: "Mock Interview", path: "/Mock-Interview" },
     { label: "Account Setting", path: "/Account-Setting" },
 ]

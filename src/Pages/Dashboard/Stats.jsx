@@ -8,6 +8,7 @@ import Text from "../../assets/Text.svg"
 import CV from "../../assets/CV.svg"
 import speak from "../../assets/Speak.svg"
 import GlassCard from '../../components/Layout/GlassEffect'
+import { useNavigate } from 'react-router-dom'
 
 const Stats = ({ data }) => {
     const statsCard = [
@@ -16,6 +17,8 @@ const Stats = ({ data }) => {
         { id: 3, icon: Text, label: "MOCK INTERVIEWS", points: `${data.interviews}`, body: "+2 since last week" },
         { id: 4, icon: danger, label: "SKILL GAPS FOUND", points: `${data.skillGap}`, body: "Critical for Senior Level" },
     ]
+
+    const navigate = useNavigate()
 
     return (
         <div className='flex flex-col gap-6 md:gap-12'>
@@ -31,9 +34,9 @@ const Stats = ({ data }) => {
                 {/* Resume and Interview Buttons */}
                 <div className='flex flex-row gap-[16px] flex-wrap justify-center md:justify-end'>
                     <div>
-                        <Button variant="secondary" size="normal" className="cursor-pointer"><img src={upload} alt="" className='h-[16px] w-[16px]' /> Start Free Analysis</Button>
+                        <Button variant="secondary" size="normal" className="cursor-pointer" onClick={() => navigate("/resume-Analyzer")}> <img src={upload} alt="" className='h-[16px] w-[16px]' /> Upload Resume</Button>
                     </div>
-                    <Button variant="glass" rounded="rounded-lg" size="normal" className="text-white font-normal cursor-pointer "><img src={interview} alt="" className='h-[16px] w-[16px]' /> Try Mock Interview</Button>
+                    <Button variant="glass" rounded="rounded-lg" size="normal" className="text-white font-normal cursor-pointer "><img src={interview} alt="" className='h-[16px] w-[16px]' /> Start Mock Interview</Button>
                 </div>
             </div>
 
