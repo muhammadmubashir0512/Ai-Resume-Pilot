@@ -9,6 +9,7 @@ import Tips from './Tips'
 import Button from '../../components/Button'
 import speak from "../../assets/Speak.svg"
 import TargetContext from './TargetContext'
+import { toast, Toaster } from 'react-hot-toast'
 
 const ResumeUpload = () => {
 
@@ -34,11 +35,18 @@ const ResumeUpload = () => {
             skills: []
         })
 
-        navigate("/resume-Analyzer/result")
+        if (resume && targetContext) {
+            toast.success("Resume Analyze Result")
+            navigate("/resume-Analyzer/result")
+        } else {
+            toast.error("Please upload resume or add Target Context")
+        }
+
     }
 
     return (
         <PageWrapper className='justify-center items-center'>
+            <Toaster />
             <DashboardNavbar />
 
             {/* Title */}

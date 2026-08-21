@@ -5,8 +5,12 @@ import { Typography } from '../../../styles/Font'
 import Arrow from "../../../assets/Arrow.svg"
 import Checked from "../../../assets/Checked.svg"
 import HeroHeading from '../../../components/Layout/HeadingSection'
+import { useNavigate } from 'react-router-dom'
 
 export const HeroSection = () => {
+
+    const navigate = useNavigate()
+
     return (
         <div className='z-0 w-full px-[24px] lg:px-[40px] flex flex-col gap-[24px] lg:gap-[48px] flex-items-center items-center justify-between'>
 
@@ -25,9 +29,9 @@ export const HeroSection = () => {
 
                 <div className='flex flex-row gap-[16px] flex-wrap justify-center'>
                     <div>
-                        <Button variant="secondary" size="normal" className="cursor-pointer">Start Free Analysis <img src={Arrow} alt="" className='h-[16px] w-[16px]' /></Button>
+                        <Button variant="secondary" size="normal" className="cursor-pointer" onClick={() => navigate("/login")}>Start Free Analysis <img src={Arrow} alt="" className='h-[16px] w-[16px]' /></Button>
                     </div>
-                    <Button variant="glass" rounded="rounded-lg" size="normal" className="text-white font-normal cursor-pointer ">Try Mock Interview</Button>
+                    <Button variant="glass" rounded="rounded-lg" size="normal" className="text-white font-normal cursor-pointer " onClick={() => navigate("/pricing")}>Try Mock Interview</Button>
                 </div>
             </div>
 

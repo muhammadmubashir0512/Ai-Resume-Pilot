@@ -36,7 +36,7 @@ const Stats = ({ data }) => {
                     <div>
                         <Button variant="secondary" size="normal" className="cursor-pointer" onClick={() => navigate("/resume-Analyzer")}> <img src={upload} alt="" className='h-[16px] w-[16px]' /> Upload Resume</Button>
                     </div>
-                    <Button variant="glass" rounded="rounded-lg" size="normal" className="text-white font-normal cursor-pointer "><img src={interview} alt="" className='h-[16px] w-[16px]' /> Start Mock Interview</Button>
+                    <Button variant="glass" rounded="rounded-lg" size="normal" className="text-white font-normal cursor-pointer " onClick={() => navigate("/Mock-Interview/pricing")}><img src={interview} alt="" className='h-[16px] w-[16px]' /> Start Mock Interview</Button>
                 </div>
             </div>
 

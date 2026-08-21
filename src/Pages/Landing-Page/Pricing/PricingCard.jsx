@@ -5,7 +5,7 @@ import GlassCard from "../../../components/Layout/GlassEffect"
 import Button from "../../../components/Button"
 import { PricingData } from "./PricingCardData"
 
-const PricingCard = (className = "") => {
+const PricingCard = ({ className = "", onClick }) => {
     return (
         <div className="grid grid-cols-1  lg:grid-cols-3 w-full px-0 md:px-45 gap-8">
             {
@@ -39,7 +39,13 @@ const PricingCard = (className = "") => {
                             </div>
 
                             <div className="pt-6 w-full mt-auto">
-                                {card.popular ? (
+                                {card.title === "FREE" ? (
+                                    <GlassCard padding="p-2">
+                                        <Button variant="" size="md" className="w-full flex text-white items-center cursor-pointer justify-center" onClick={onClick}>
+                                            {card.ButtonText}
+                                        </Button>
+                                    </GlassCard>
+                                ) : card.popular ? (
                                     <Button variant="light" size="lg" rounded="rounded-xl" className="w-full p-2 flex text-white items-center cursor-pointer justify-center">
                                         {card.ButtonText}
                                     </Button>

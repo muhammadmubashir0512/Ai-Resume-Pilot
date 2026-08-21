@@ -92,7 +92,7 @@ const TargetContext = ({ data, onChange, skillInput, setSkillInput }) => {
                             experienceType.map((exp) => {
                                 return (
 
-                                    <div key={exp.id} className='flex flex-row gap-2 items-center' onClick={() =>
+                                    <div key={exp.id} className='flex flex-row gap-2 items-center cursor-pointer' onClick={() =>
                                         onChange({
                                             ...data,
                                             experience: exp.type

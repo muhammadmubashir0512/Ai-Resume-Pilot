@@ -9,7 +9,7 @@ import profile from "../../assets/profile.svg"
 const navItem = [
     { label: "Dashboard", path: "/dashboard" },
     { label: "Resume Analyzer", path: "/resume-Analyzer" },
-    { label: "Mock Interview", path: "/Mock-Interview" },
+    { label: "Mock Interview", path: "/Mock-Interview", navigateTo: "/Mock-Interview/Preference" },
     { label: "Account Setting", path: "/Account-Setting" },
 ]
 
@@ -42,7 +42,7 @@ const DashboardNavbar = () => {
                         return (
                             <div
                                 key={item.path}
-                                onClick={() => handleNav(item.path)}
+                                onClick={() => handleNav(item.navigateTo || item.path)}
                                 className={`relative flex flex-col gap-2 items-center cursor-pointer whitespace-nowrap ${isActive ? "text-[#C0C1FF] font-bold text-sm xl:text-[16px]" : "text-[#C7C4D7] text-sm xl:text-[16px] font-normal"}`}
                             >
                                 <span className="mb-2">{item.label}</span>
@@ -97,7 +97,7 @@ const DashboardNavbar = () => {
                                 return (
                                     <div
                                         key={item.path}
-                                        onClick={() => handleNav(item.path)}
+                                        onClick={() => handleNav(item.navigateTo || item.path)}
                                         className={`relative flex flex-col items-center gap-2 cursor-pointer ${isActive ? "text-[#C0C1FF] font-bold text-[16px]" : "text-[#C7C4D7] text-[16px] font-normal"}`}
                                     >
                                         <span className="mb-2">{item.label}</span>
