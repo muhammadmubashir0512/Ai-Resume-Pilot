@@ -9,6 +9,9 @@ import CV from "../../assets/CV.svg"
 import speak from "../../assets/Speak.svg"
 import GlassCard from '../../components/Layout/GlassEffect'
 import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+import { get } from '../../services/api'
 
 const Stats = ({ data }) => {
     const statsCard = [
@@ -18,7 +21,66 @@ const Stats = ({ data }) => {
         { id: 4, icon: danger, label: "SKILL GAPS FOUND", points: `${data.skillGap}`, body: "Critical for Senior Level" },
     ]
 
+    const [userName, setuserName] = useState("")
     const navigate = useNavigate()
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        const getUser = async () => {
+            try {
+                setLoading(true)
+                const response = await get("/auth/me")
+
+                setuserName(response.data.fullName)
+
+            } catch (error) {
+                console.log("Error", error)
+                toast.error(error.message || "Something went wrong")
+            } finally {
+                setLoading(false)
+            }
+        }
+        getUser()
+
+    }, [navigate])
+
+    if (loading) {
+        return (
+            <div className="min-h-[70vh] flex flex-col justify-center items-center gap-5">
+
+                <div className="relative flex items-center justify-center">
+                    <div
+                        className="w-14 h-14 rounded-full border-4 border-white/10 border-t-[#4CD7F6] animate-spin"
+                    />
+
+                    <div
+                        className="absolute w-8 h-8 rounded-full"
+                        style={{
+                            backgroundColor: `${Colors.progressCircle}10`
+                        }}
+                    />
+                </div>
+
+                <div className="flex flex-col items-center gap-1 text-center">
+                    <p
+                        className="text-[18px] font-semibold"
+                        style={{ color: Colors.textbody }}
+                    >
+                        Loading Dashboard
+                    </p>
+
+                    <p
+                        className="text-[14px]"
+                        style={{ color: Colors.text }}
+                    >
+                        Fetching your application activity...
+                    </p>
+                </div>
+
+            </div>
+        )
+    }
+
 
     return (
         <div className='flex flex-col gap-6 md:gap-12'>
@@ -26,7 +88,7 @@ const Stats = ({ data }) => {
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center justify-between'>
                 {/* Welcome Note */}
                 <div className='flex flex-col gap-2'>
-                    <p className={`${Typography.responsiveHeading}`} style={{ color: Colors.textbody }}>Good morning, Muhammad</p>
+                    <p className={`${Typography.responsiveHeading}`} style={{ color: Colors.textbody }}>Welcome, {userName}</p>
                     <p className={`${Typography.small} md:${Typography.body}`} style={{ color: Colors.text }}>Your career trajectory is looking sharp. You've closed two major skill gaps
                         this week. Ready to tackle that Senior Role?</p>
                 </div>

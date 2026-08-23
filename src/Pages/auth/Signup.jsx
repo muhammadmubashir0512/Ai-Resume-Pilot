@@ -10,6 +10,9 @@ import { useForm } from "react-hook-form"
 import google from "../../assets/google.png"
 import eyeIcon from "../../assets/eyeIcon.svg"
 import { useNavigate } from "react-router-dom"
+import toast, { Toaster } from "react-hot-toast"
+import { useState } from "react"
+import { post } from "../../services/api"
 
 const signupData = [
     { id: 1, icon: optimize, label: "AI-POWERED OPTIMIZATION", body: "Our algorithms analyze job descriptions to tailor every bullet point for maximum ATS impact.", headingColor: "#C0C1FF" },
@@ -27,16 +30,31 @@ const Signup = () => {
         formState: { errors, isSubmitting },
     } = useForm()
 
-    const onSubmit = (userData) => {
+    const onSubmit = async (userData) => {
         console.log("User Data...", userData)
-        setTimeout(() => {
+
+        try {
+            const response = await post("/auth/signup", userData)
+
+
+            console.log("Logged in user data.....", response)
+            localStorage.setItem("accessToken", response.data.accessToken);
+
+            toast.success(response.message || "Signup Completed!");
+
             navigate("/dashboard")
-        }, 1000);
+
+        } catch (error) {
+            console.log("Error", error)
+            toast.error(error.message || "Something went wrong")
+        }
+
     }
 
     return (
         <div className="w-full min-h-screen grid grid-cols-1 lg:grid-cols-2" style={{ backgroundColor: Colors.primary }}>
 
+            <Toaster />
             {/* Left — Marketing Content */}
             <div className="hidden lg:flex relative flex-col gap-10 lg:gap-14 justify-center px-6 md:px-8 lg:px-12 py-12 bg-[#060E20] overflow-hidden">
                 <div className="flex flex-col gap-5 lg:gap-7">

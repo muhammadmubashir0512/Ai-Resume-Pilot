@@ -10,6 +10,9 @@ import { useForm } from "react-hook-form"
 import google from "../../assets/google.png"
 import eyeIcon from "../../assets/eyeIcon.svg"
 import { useNavigate } from "react-router-dom"
+import toast from "react-hot-toast"
+import { post } from "../../services/api"
+
 
 const signupData = [
     { id: 1, icon: optimize, label: "Improve your resume with AI" },
@@ -27,11 +30,22 @@ const Login = () => {
         formState: { errors, isSubmitting },
     } = useForm()
 
-    const onSubmit = (userData) => {
-        console.log("User Data...", userData)
-        setTimeout(() => {
+    const onSubmit = async (userData) => {
+        try {
+            const response = await post("/auth/login", userData)
+
+            console.log("Logged in user data.....", response)
+            localStorage.setItem("accessToken", response.data.accessToken);
+
+            toast.success(response.message || "User Loggedin");
+
             navigate("/dashboard")
-        }, 1000);
+
+        } catch (error) {
+            console.log("Error", error)
+            toast.error(error.message || "Something went wrong")
+
+        }
     }
 
     return (

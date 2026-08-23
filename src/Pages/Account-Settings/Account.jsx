@@ -13,7 +13,8 @@ import logout from "../../assets/logout.svg"
 import cross from "../../assets/Cross.svg"
 import Upload from "../../assets/upload.svg"
 import { useNavigate } from 'react-router-dom'
-import { toast, Toaster } from 'react-hot-toast'
+import { toast } from 'react-hot-toast'
+import { get } from '../../services/api'
 
 const Account = () => {
 
@@ -31,6 +32,7 @@ const Account = () => {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
     const [isOpen, setIsOpen] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const handleProfileChange = (e) => {
         const file = e.target.files?.[0]
@@ -48,16 +50,27 @@ const Account = () => {
         setIsOpen(false)
     }
 
-    const handleLogout = () => {
-        setTimeout(() => {
-            toast.success("Logout successfully")
+    const handleLogout = async () => {
+        try {
+            setLoading(true)
+            const response = await get("/auth/logout")
+
+
+            toast.success(response.message || "Successfully Logout");
+
+            localStorage.setItem("accessToken", "");
+
             navigate("/login")
-        }, 1000);
+
+        } catch (error) {
+            console.log("Error", error)
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
         <PageWrapper>
-            <Toaster />
 
             <DashboardNavbar />
 
@@ -579,8 +592,9 @@ const Account = () => {
                                         size="normal"
                                         className="w-full justify-center cursor-pointer"
                                         onClick={handleLogout}
+                                        disabled={loading}
                                     >
-                                        Log Out
+                                        {loading ? "Logging Out..." : "Log Out"}
                                     </Button>
 
                                     <Button
