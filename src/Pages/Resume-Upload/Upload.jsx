@@ -23,8 +23,7 @@ const Upload = ({ resume, onResumeSelect }) => {
 
         // File type validation
         const allowedTypes = [
-            "application/pdf",
-            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            "application/pdf"
         ]
 
         if (!allowedTypes.includes(file.type)) {

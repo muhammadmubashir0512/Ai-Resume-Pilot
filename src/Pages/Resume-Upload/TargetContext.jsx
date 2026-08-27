@@ -1,35 +1,14 @@
 import { Typography } from '../../styles/Font'
 import { Colors } from '../../styles/Color'
 import GlassCard from '../../components/Layout/GlassEffect'
-import cross from "../../assets/Cross.svg"
-import Button from '../../components/Button'
 
-const TargetContext = ({ data, onChange, skillInput, setSkillInput }) => {
+const TargetContext = ({ data, onChange }) => {
 
     const experienceType = [
         { id: 1, type: "Entry Level" },
         { id: 2, type: "Mid-Senior" },
         { id: 3, type: "Director/Exec" },
     ]
-
-    const handleSkills = () => {
-        if (!skillInput.trim()) return
-
-        onChange({
-            ...data,
-            skills: [...data.skills, skillInput.trim()]
-        })
-
-        setSkillInput("")
-    }
-
-    const removeSkills = (id) => {
-        onChange({
-            ...data,
-            skills: data.skills.filter((_, i) => i !== id)
-        })
-    }
-
 
     return (
         <GlassCard>
@@ -108,44 +87,25 @@ const TargetContext = ({ data, onChange, skillInput, setSkillInput }) => {
                     </div>
                 </div>
 
-                {/* Add Skills */}
-                <div className='flex flex-col gap-2'>
-                    <p className="block text-[12px] font-semibold uppercase tracking-wide mb-1.5" style={{ color: Colors.text }}>
-                        EXPERIENCE LEVEL
-                    </p>
-
-                    {/* Skills Array */}
-                    <div className='flex flex-row gap-3 items-center flex-wrap'>
-                        {
-                            (data.skills).map((skill, index) => {
-                                return (
-                                    <div key={index} className='flex flex-row gap-2 items-center py-1 px-3 rounded-full border border-[#C0C1FF]/20 bg-[#C0C1FF]/10'>
-                                        <p className='text-[14px] font-medium text-[#C0C1FF]'>{skill}</p>
-                                        <img src={cross} alt="" className='w-[12px] h-[12px]' style={{ filter: "invert(1)" }} onClick={() => removeSkills(index)} />
-                                    </div>
-                                )
+                {/* Job Description */}
+                <div>
+                    <label className="block text-[12px] font-semibold uppercase tracking-wide mb-1.5" style={{ color: Colors.text }}>
+                        Job Description
+                    </label>
+                    <textarea
+                        value={data.jobDescription}
+                        onChange={(e) =>
+                            onChange({
+                                ...data,
+                                jobDescription: e.target.value
                             })
                         }
-                    </div>
-
-                    {/* Skill Input & add button */}
-                    <div className='flex flex-row gap-4 flex-wrap'>
-                        <input
-                            type="text"
-                            value={skillInput}
-                            onChange={(e) =>
-                                setSkillInput(e.target.value)
-                            }
-                            placeholder="e.g; React"
-                            className="w-full text-white px-4 py-2.5 rounded-lg text-sm bg-white/5 border border-white/10 placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[#4CD7F6]/50 focus:border-transparent transition-all duration-200"
-                        />
-
-                        <Button variant="secondary" size="normal" onClick={() => handleSkills()}>
-                            + Add Skills
-                        </Button>
-                    </div>
-
+                        placeholder="Paste Job Description here..."
+                        className="w-full text-white px-4 py-2.5 h-[200px] rounded-lg text-sm bg-white/5 border border-white/10 placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[#4CD7F6]/50 focus:border-transparent transition-all duration-200"
+                    />
                 </div>
+
+
 
             </div>
         </GlassCard>

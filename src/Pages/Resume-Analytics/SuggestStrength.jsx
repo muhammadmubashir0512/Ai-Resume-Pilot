@@ -29,6 +29,7 @@ const SuggestStrength = ({ data }) => {
                             >
                                 {data.atsScore}%
                             </p>
+                            <p className="text-[11px] md:text[11px] text-wrap font-semibold" style={{ color: Colors.secondary }}>Overall ATS</p>
                         </div>
 
                         <div className="flex flex-col gap-8 w-full">
@@ -160,7 +161,7 @@ const SuggestStrength = ({ data }) => {
                                         className={`${Typography.small}`}
                                         style={{ color: Colors.text }}
                                     >
-                                        {point.body}
+                                        {point}
                                     </p>
                                 </div>
                             ))}
@@ -212,15 +213,18 @@ const SuggestStrength = ({ data }) => {
 
                         return (
                             <GlassCard key={con.id}>
-                                <div className="flex flex-row justify-between items-center">
-                                    <p className={`${Typography.body}`} style={{ color: Colors.text }}>{con.tag}</p>
-                                    {
-                                        con.status === true ? (
-                                            <img src={confirm} alt="" className="w-[20px] h-[20px]" />
-                                        ) : (
-                                            <img src={missing} alt="" className="w-[20px] h-[20px]" />
-                                        )
-                                    }
+                                <div className="flex flex-col gap-3">
+                                    <div className="flex flex-row justify-between items-center">
+                                        <p className={`${Typography.body}`} style={{ color: Colors.textbody }}>{con.tag}</p>
+                                        {
+                                            con.status === "Good" ? (
+                                                <img src={confirm} alt="" className="w-[20px] h-[20px]" />
+                                            ) : (
+                                                <img src={missing} alt="" className="w-[20px] h-[20px]" />
+                                            )
+                                        }
+                                    </div>
+                                    <p className={`text-[13px] font-normal`} style={{ color: Colors.text }}>{con.note}</p>
                                 </div>
                             </GlassCard>
                         )

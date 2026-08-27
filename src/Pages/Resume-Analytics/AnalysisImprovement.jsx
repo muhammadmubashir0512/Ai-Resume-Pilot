@@ -50,7 +50,7 @@ const AnalysisImprovement = ({ data }) => {
                       rounded="rounded-full"
                     >
                       <div
-                        className="text-[13px] sm:text-[14px] md:text-[16px] font-medium py-1.5 sm:py-1 px-3 sm:px-4"
+                        className="text-[14px] font-medium py-1.5 sm:py-1 px-3 sm:px-4"
                         style={{ color: Colors.light }}
                       >
                         {keyword}
@@ -90,7 +90,7 @@ const AnalysisImprovement = ({ data }) => {
                     <div
                       key={keyword}
                       className="
-                                    text-[13px] sm:text-[14px] md:text-[16px]
+                                    text-[14px]
                                     rounded-full
                                     border border-[#4CD7F6]
                                     font-medium
@@ -124,7 +124,7 @@ const AnalysisImprovement = ({ data }) => {
           </p>
 
           <div className="flex flex-col gap-6 sm:gap-7 md:gap-8">
-            {data.topImprovements.map((improvement) => {
+            {data.topImprovements.map((improvement, index) => {
               return (
                 <div
                   key={improvement.id}
@@ -136,24 +136,24 @@ const AnalysisImprovement = ({ data }) => {
                     className="
                                 flex-shrink-0
                                 flex items-center justify-center
-                                text-xs sm:text-sm
+                                text-sm
                                 font-bold
-                                h-7 w-7
-                                sm:h-8 sm:w-8
+                                h-6 w-6
+                                sm:h-6 sm:w-6
                                 rounded-full
                                 bg-[#C0C1FF]/40
                             "
                     style={{ color: Colors.textbody }}
                   >
-                    {improvement.id}
+                    {index + 1}
                   </div>
 
                   {/* Content */}
-                  <div className="flex flex-col gap-1 min-w-0">
+                  <div className="flex flex-col gap-2.5 min-w-0">
 
                     <p
                       className="
-                                    text-[15px]
+                                    text-[16px]
                                     sm:text-[16px]
                                     md:text-[18px]
                                     font-semibold
@@ -166,13 +166,11 @@ const AnalysisImprovement = ({ data }) => {
 
                     <p
                       className={`
-                                    ${Typography.body}
-                                    text-sm sm:text-base
-                                    leading-relaxed
+                                    text-[13px]
                                 `}
                       style={{ color: Colors.text }}
                     >
-                      {improvement.description}
+                      {improvement.body}
                     </p>
 
                   </div>

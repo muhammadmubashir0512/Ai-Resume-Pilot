@@ -14,6 +14,7 @@ import Mock_Interview from './Pages/Mock-Interview/Mock_Interview'
 import Mock_Interview_Preference from './Pages/Mock-Interview/Mock_Interview_Preference'
 import InterviewResult from './Pages/Mock-Interview/InterviewResult'
 import Account from './Pages/Account-Settings/Account'
+import ImproveResume from './Pages/Improve-Resume/ImproveResume'
 
 function App() {
 
@@ -64,10 +65,17 @@ function App() {
         </PageTransition>
     },
     {
-      path: "/resume-Analyzer/result",
+      path: "/resume-Analyzer/result/:Id",
       element:
         <PageTransition>
           <ResumeAnalytics />
+        </PageTransition>
+    },
+    {
+      path: "/resume-Analyzer/improve",
+      element:
+        <PageTransition>
+          <ImproveResume />
         </PageTransition>
     },
     {

@@ -40,7 +40,7 @@ const Signup = () => {
             console.log("Logged in user data.....", response)
             localStorage.setItem("accessToken", response.data.accessToken);
 
-            toast.success(response.message || "Signup Completed!");
+            toast.success(response.message || "Signup Completed! Verification OTP send to your mail");
 
             navigate("/dashboard")
 

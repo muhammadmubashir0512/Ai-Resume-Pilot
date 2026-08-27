@@ -17,9 +17,9 @@ const UpdateResume = () => {
                         variant="secondary"
                         size="normal"
                         className="shadow-sm shadow-[#4CD7F6]/30 cursor-pointer w-full sm:w-auto"
-                        onClick={() => navigate("/resume-Analyzer")}
+                        onClick={() => navigate("/resume-Analyzer/improve")}
                     >
-                        Update & Upload Resume
+                        Improve Your Resume
                     </Button>
 
                     <Button
@@ -28,7 +28,7 @@ const UpdateResume = () => {
                         className="cursor-pointer justify-center text-center w-full sm:w-auto"
                         onClick={() => navigate("/Mock-Interview/pricing")}
                     >
-                        Start Mock Interview
+                        Back To Dashboard
                     </Button>
                 </div>
             </div>
