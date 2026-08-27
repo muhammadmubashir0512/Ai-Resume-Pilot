@@ -3,6 +3,7 @@ import DashboardNavbar from '../Dashboard/DashboardNavbar'
 import { Colors } from '../../styles/Color'
 import { Typography } from '../../styles/Font'
 import TrustNote from './TrustNote'
+import MissingDataForm from './MissingDataForm'
 
 
 const ImproveResume = () => {
@@ -46,6 +47,7 @@ const ImproveResume = () => {
             </div>
 
             <TrustNote />
+            <MissingDataForm />
 
         </PageWrapper>
     )

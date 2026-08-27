@@ -72,7 +72,7 @@ const TrustNote = () => {
                 <GlassCard>
                     <div className="flex flex-row gap-3 items-center flex-wrap">
                         <img src={shield} alt="" className='w-[24px] h-[24px]' />
-                        <p className="text-[12px] font-medium max-w-[800px]" style={{ color: Colors.textbody }}><span className="text-[14px] font-bold" style={{ color: Colors.text }}>Trust Note:</span> Only select skills and information you genuinely have. ResumePilot will never add unverified
+                        <p className="text-[13px] font-normal max-w-[800px]" style={{ color: Colors.textbody }}><span className="text-[15px] font-bold" style={{ color: Colors.text }}>Trust Note:</span> Only select skills and information you genuinely have. ResumePilot will never add unverified
                             skills or experience to your resume.</p>
 
                     </div>
