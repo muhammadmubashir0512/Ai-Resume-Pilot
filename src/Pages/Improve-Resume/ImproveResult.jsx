@@ -274,7 +274,7 @@ const ImproveResult = () => {
                                 className="w-full justify-center text-center cursor-pointer"
                                 onClick={() => navigate("/resume-Analyzer")}
                             >
-                                Upload Another Resume
+                                Upload Another  Resume
                             </Button>
 
                         </div>

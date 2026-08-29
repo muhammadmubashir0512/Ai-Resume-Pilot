@@ -13,25 +13,29 @@ import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { get } from '../../services/api'
 
-const Stats = ({ data }) => {
-    const statsCard = [
-        { id: 1, icon: CV, label: "RESUME SCORE", points: `${data.resumeScore}%` },
-        { id: 2, icon: speak, label: "INTERVIEW READINESS", points: `${data.interviewsReadiness}%` },
-        { id: 3, icon: Text, label: "MOCK INTERVIEWS", points: `${data.interviews}`, body: "+2 since last week" },
-        { id: 4, icon: danger, label: "SKILL GAPS FOUND", points: `${data.skillGap}`, body: "Critical for Senior Level" },
-    ]
-
-    const [userName, setuserName] = useState("")
+const Stats = () => {
     const navigate = useNavigate()
+
+    const [userName, setUserName] = useState("")
+    const [resumeScore, setResumeScore] = useState(0)
+    const [totalResume, setTotalResume] = useState(0)
+    const [skillGap, setSkillGap] = useState(0)
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        const getUser = async () => {
+        const fetchData = async () => {
             try {
                 setLoading(true)
-                const response = await get("/auth/me")
 
-                setuserName(response.data.fullName)
+                const [userRes, scoreRes] = await Promise.all([
+                    get("/auth/me"),
+                    get("/user/avgscore"),
+                ])
+
+                setUserName(userRes.data.fullName)
+                setResumeScore(scoreRes.data[0].averageAtsScore ?? 0)
+                setSkillGap(scoreRes.data[0].skillGapPercent ?? 0)
+                setTotalResume(scoreRes.data[0].totalResumes ?? 0)
 
             } catch (error) {
                 console.log("Error", error)
@@ -40,9 +44,16 @@ const Stats = ({ data }) => {
                 setLoading(false)
             }
         }
-        getUser()
 
-    }, [navigate])
+        fetchData()
+    }, [])
+
+    const statsCard = [
+        { id: 1, icon: CV, label: "RESUME SCORE", points: `${resumeScore}%`, body: `Total Uploaded Resume: ${totalResume}` },
+        { id: 2, icon: speak, label: "INTERVIEW READINESS", points: `0%` },
+        { id: 3, icon: Text, label: "MOCK INTERVIEWS", points: `0`, body: "No interviews yet" },
+        { id: 4, icon: danger, label: "SKILL GAPS FOUND", points: `${skillGap}%`, body: "Skills Missing" },
+    ]
 
     if (loading) {
         return (

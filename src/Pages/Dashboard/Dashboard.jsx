@@ -4,7 +4,6 @@ import AiInterview from './AiInterview'
 import DashboardNavbar from './DashboardNavbar'
 import ResumeAnalysis from './ResumeAnalysis'
 import Stats from './Stats'
-import RecentActivity from './RecentActivity'
 
 const Dashboard = () => {
 
@@ -54,33 +53,6 @@ const Dashboard = () => {
 
                 sentimentAnalysis: "Confident"
             },
-
-            recentActivity: [
-                {
-                    id: 1,
-                    title: "Mock Interview: Session #12",
-                    time: "Oct 14, 11:20 AM",
-                    type: "interview"
-                },
-                {
-                    id: 2,
-                    title: "Resume Analysis Completed",
-                    time: "Yesterday, 4:32 PM",
-                    type: "resume"
-                },
-                {
-                    id: 3,
-                    title: "New Skill Gap Identified: Terraform",
-                    time: "Oct 12, 9:15 PM",
-                    type: "skillGap"
-                },
-                {
-                    id: 4,
-                    title: "Profile Updated: Senior Role Intent",
-                    time: "Oct 10, 2:45 PM",
-                    type: "profile"
-                }
-            ]
         })
     }, [])
 
@@ -99,7 +71,6 @@ const Dashboard = () => {
                 <AiInterview data={dashboardData.aiInterview} />
             </div>
 
-            <RecentActivity data={dashboardData.recentActivity} />
         </PageWrapper>
     )
 }
