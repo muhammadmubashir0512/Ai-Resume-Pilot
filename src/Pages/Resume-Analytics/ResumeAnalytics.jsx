@@ -1,12 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import Button from '../../components/Button'
 import { Typography } from '../../styles/Font'
 import { Colors } from '../../styles/Color'
 import PageWrapper from '../../components/Layout/PageWrapper'
 import DashboardNavbar from '../Dashboard/DashboardNavbar'
-import download from "../../assets/download.svg"
-import again from "../../assets/again.svg"
 import SuggestStrength from './SuggestStrength'
 import AnalysisImprovement from './AnalysisImprovement'
 import UpdateResume from './updateResume'
@@ -18,13 +15,13 @@ import ResumeSummary from './ResumeSummary'
 const ResumeAnalytics = () => {
     const analysis = useResumeStore((state) => state.analysis)
     const setAnalysis = useResumeStore((state) => state.setAnalysis)
-    // const [analysis, setAnalysis] = useState(null)
 
     const { Id } = useParams()
 
     const [polling, setPolling] = useState(false)
     const [poll, setPoll] = useState("")
     const intervalRef = useRef(null)
+    const missCountRef = useRef(0)
 
     useEffect(() => {
         if (analysis || !Id) return
@@ -35,6 +32,7 @@ const ResumeAnalytics = () => {
             try {
                 const response = await get(`/resume/analysis/${Id}`)
                 const statusData = response.data
+                missCountRef.current = 0
 
                 setPoll(statusData.stage)
 
@@ -48,11 +46,15 @@ const ResumeAnalytics = () => {
                     setPolling(false)
                 }
             } catch (error) {
-                toast.error(error.message || "Something went wrong")
-                clearInterval(intervalRef.current)
-                setPolling(false)
+                missCountRef.current += 1
+
+                if (missCountRef.current >= 3) {
+                    toast.error(error.message || "Something went wrong")
+                    clearInterval(intervalRef.current)
+                    setPolling(false)
+                }
             }
-        }, 1000)
+        }, 1500)
 
         return () => clearInterval(intervalRef.current)
     }, [Id, analysis])
@@ -135,38 +137,15 @@ const ResumeAnalytics = () => {
                         Detailed AI analysis and ATS optimization for Senior Software Engineer role.
                     </p>
                 </div>
-
-                {/* <div className="flex flex-row gap-0 flex-wrap justify-center md:justify-end">
-                    <Button
-                        variant="glass"
-                        size="normal"
-                        className="cursor-pointer"
-                        onClick={() => navigate("/resume-Analyzer")}
-                    >
-                        <img src={download} alt="" className="h-4 w-4" />
-                        Download Report
-                    </Button>
-
-                    <Button
-                        rounded="rounded-lg"
-                        size="normal"
-                        className="text-white font-normal cursor-pointer"
-                        onClick={() => navigate("/resume-Analyzer")}
-                    >
-                        <img src={again} alt="" className="h-4 w-4" />
-                        Re-analyze
-                    </Button>
-                </div> */}
             </div>
 
             <SuggestStrength data={analysisData} />
             <AnalysisImprovement data={keywordData} />
             <ResumeSummary summary={resumeSummary} />
-            <UpdateResume />
+            <UpdateResume jobId={Id} />
 
         </PageWrapper>
     )
 }
 
 export default ResumeAnalytics
-

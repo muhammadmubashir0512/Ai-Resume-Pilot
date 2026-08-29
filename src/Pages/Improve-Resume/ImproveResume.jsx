@@ -22,28 +22,6 @@ const ImproveResume = () => {
                         optimized resume.
                     </p>
                 </div>
-
-                {/* <div className="flex flex-row gap-0 flex-wrap justify-center md:justify-end">
-                                <Button
-                                    variant="glass"
-                                    size="normal"
-                                    className="cursor-pointer"
-                                    onClick={() => navigate("/resume-Analyzer")}
-                                >
-                                    <img src={download} alt="" className="h-4 w-4" />
-                                    Download Report
-                                </Button>
-            
-                                <Button
-                                    rounded="rounded-lg"
-                                    size="normal"
-                                    className="text-white font-normal cursor-pointer"
-                                    onClick={() => navigate("/resume-Analyzer")}
-                                >
-                                    <img src={again} alt="" className="h-4 w-4" />
-                                    Re-analyze
-                                </Button>
-                            </div> */}
             </div>
 
             <TrustNote />

@@ -9,18 +9,12 @@ import shield from "../../assets/Shield.svg"
 const TrustNote = () => {
     const analysis = useResumeStore((state) => state.analysis)
 
-    // if (!analysis) return null
-    // const data = [
-    //     { tag: "TARGET ROLE :", body: analysis.job_title, score: null },
-    //     { tag: "ATS Score", body: null, score: analysis.ats_score },
-    //     { tag: "Keyword Match", body: null, score: analysis.keyword_match.score },
-    //     { tag: "Formatting", body: null, score: analysis.formatting.score }
-    // ]
+    if (!analysis) return null
     const data = [
-        { tag: "TARGET ROLE :", body: "Software Engineer", score: null },
-        { tag: "ATS Score", body: null, score: 85 },
-        { tag: "Keyword Match", body: null, score: 75 },
-        { tag: "Formatting", body: null, score: 65 }
+        { tag: "TARGET ROLE :", body: analysis.job_title, score: null },
+        { tag: "ATS Score", body: null, score: analysis.ats_score },
+        { tag: "Keyword Match", body: null, score: analysis.keyword_match.score },
+        { tag: "Formatting", body: null, score: analysis.formatting.score }
     ]
 
     const getScoreColor = (score) => {

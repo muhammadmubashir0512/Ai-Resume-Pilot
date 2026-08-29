@@ -3,7 +3,7 @@ import GlassCard from '../../components/Layout/GlassEffect'
 import { Colors } from '../../styles/Color'
 import Button from '../../components/Button'
 
-const UpdateResume = () => {
+const UpdateResume = ({ jobId }) => {
 
     const navigate = useNavigate()
 
@@ -17,7 +17,7 @@ const UpdateResume = () => {
                         variant="secondary"
                         size="normal"
                         className="shadow-sm shadow-[#4CD7F6]/30 cursor-pointer w-full sm:w-auto"
-                        onClick={() => navigate("/resume-Analyzer/improve")}
+                        onClick={() => navigate(`/resume-Analyzer/improve/${jobId}`)}
                     >
                         Improve Your Resume
                     </Button>
@@ -26,7 +26,7 @@ const UpdateResume = () => {
                         variant="glass"
                         size="normal"
                         className="cursor-pointer justify-center text-center w-full sm:w-auto"
-                        onClick={() => navigate("/Mock-Interview/pricing")}
+                        onClick={() => navigate("/dashboard")}
                     >
                         Back To Dashboard
                     </Button>

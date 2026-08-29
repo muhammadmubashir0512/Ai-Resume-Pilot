@@ -2,11 +2,11 @@ import { create } from "zustand";
 
 export const useResumeStore = create((set) => ({
   analysis: null,
-  jobId: null,
+  improvedResult: null,
 
   setAnalysis: (data) => set({ analysis: data }),
 
-  setJobId: (id) => set({ jobId: id }),
+  setImprovedResult: (data) => set({ improvedResult: data }),
 
   clearAnalysis: () => set({ analysis: null, jobId: null }),
 }));
