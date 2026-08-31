@@ -17,6 +17,7 @@ import Account from './Pages/Account-Settings/Account'
 import ImproveResume from './Pages/Improve-Resume/ImproveResume'
 import ImproveResult from './Pages/Improve-Resume/ImproveResult'
 import OtpVerification from './Pages/auth/OTPVerify'
+import MockInterviewInProgress from './Pages/Mock-Interview/MockInterviewInprogress'
 
 function App() {
 
@@ -92,6 +93,13 @@ function App() {
       element:
         <PageTransition>
           <ImproveResult />
+        </PageTransition>
+    },
+    {
+      path: "/Mock-Interview/inprogress",
+      element:
+        <PageTransition>
+          <MockInterviewInProgress />
         </PageTransition>
     },
     {

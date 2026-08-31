@@ -100,8 +100,8 @@ const Stats = () => {
                 {/* Welcome Note */}
                 <div className='flex flex-col gap-2'>
                     <p className={`${Typography.responsiveHeading}`} style={{ color: Colors.textbody }}>Welcome, {userName}</p>
-                    <p className={`${Typography.small} md:${Typography.body}`} style={{ color: Colors.text }}>Your career trajectory is looking sharp. You've closed two major skill gaps
-                        this week. Ready to tackle that Senior Role?</p>
+                    <p className={`${Typography.small} md:${Typography.body}`} style={{ color: Colors.text }}>Track your progress, sharpen your resume, and prepare for your next
+                        big opportunity — all in one place.</p>
                 </div>
 
                 {/* Resume and Interview Buttons */}
@@ -109,7 +109,7 @@ const Stats = () => {
                     <div>
                         <Button variant="secondary" size="normal" className="cursor-pointer" onClick={() => navigate("/resume-Analyzer")}> <img src={upload} alt="" className='h-[16px] w-[16px]' /> Upload Resume</Button>
                     </div>
-                    <Button variant="glass" rounded="rounded-lg" size="normal" className="text-white font-normal cursor-pointer " onClick={() => navigate("/Mock-Interview/pricing")}><img src={interview} alt="" className='h-[16px] w-[16px]' /> Start Mock Interview</Button>
+                    <Button variant="glass" rounded="rounded-lg" size="normal" className="text-white font-normal cursor-pointer " onClick={() => navigate("/Mock-Interview/inprogress")}><img src={interview} alt="" className='h-[16px] w-[16px]' /> Start Mock Interview</Button>
                 </div>
             </div>
 
