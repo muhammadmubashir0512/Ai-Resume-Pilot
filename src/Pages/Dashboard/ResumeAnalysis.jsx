@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { get } from '../../services/api'
 import strength from "../../assets/strength.svg"
-import checked from "../../assets/checked.svg"
+import Checked from "../../assets/Checked.svg"
 import CV from "../../assets/CV.svg"
 import Button from '../../components/Button'
 import { useNavigate } from 'react-router-dom'
@@ -137,7 +137,7 @@ const ResumeAnalysis = () => {
                                         className="flex flex-row gap-2 items-center"
                                     >
                                         <img
-                                            src={checked}
+                                            src={Checked}
                                             alt=""
                                             className="w-[11px] h-[11px]"
                                         />
