@@ -6,7 +6,7 @@ import PageWrapper from '../../components/Layout/PageWrapper'
 import DashboardNavbar from '../Dashboard/DashboardNavbar'
 import SuggestStrength from './SuggestStrength'
 import AnalysisImprovement from './AnalysisImprovement'
-import UpdateResume from './UpdateResume'
+import ResumeUpdate from './UpdateResume'
 import { useResumeStore } from '../../Store/ResumeStore'
 import { get } from '../../services/api'
 import { toast } from 'react-hot-toast'
@@ -142,7 +142,7 @@ const ResumeAnalytics = () => {
             <SuggestStrength data={analysisData} />
             <AnalysisImprovement data={keywordData} />
             <ResumeSummary summary={resumeSummary} />
-            <UpdateResume jobId={Id} />
+            <ResumeUpdate jobId={Id} />
 
         </PageWrapper>
     )

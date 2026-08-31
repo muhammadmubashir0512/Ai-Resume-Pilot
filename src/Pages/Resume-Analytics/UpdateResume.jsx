@@ -3,7 +3,7 @@ import GlassCard from '../../components/Layout/GlassEffect'
 import { Colors } from '../../styles/Color'
 import Button from '../../components/Button'
 
-const UpdateResume = ({ jobId }) => {
+const ResumeUpdate = ({ jobId }) => {
 
     const navigate = useNavigate()
 
@@ -36,4 +36,4 @@ const UpdateResume = ({ jobId }) => {
     )
 }
 
-export default UpdateResume
+export default ResumeUpdate
