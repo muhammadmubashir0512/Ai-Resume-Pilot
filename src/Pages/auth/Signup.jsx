@@ -42,7 +42,7 @@ const Signup = () => {
 
             toast.success(response.message || "Signup Completed! Verification OTP send to your mail");
 
-            navigate("/dashboard")
+            navigate("/verify-otp", { state: { email: userData.email } })
 
         } catch (error) {
             console.log("Error", error)

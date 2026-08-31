@@ -16,6 +16,7 @@ import InterviewResult from './Pages/Mock-Interview/InterviewResult'
 import Account from './Pages/Account-Settings/Account'
 import ImproveResume from './Pages/Improve-Resume/ImproveResume'
 import ImproveResult from './Pages/Improve-Resume/ImproveResult'
+import OtpVerification from './Pages/auth/OTPVerify'
 
 function App() {
 
@@ -48,6 +49,13 @@ function App() {
       element:
         <PageTransition>
           <Login />
+        </PageTransition>
+    },
+    {
+      path: "/verify-otp",
+      element:
+        <PageTransition>
+          <OtpVerification />
         </PageTransition>
     },
     // Protected Routes started here

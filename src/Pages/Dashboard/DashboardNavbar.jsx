@@ -1,10 +1,11 @@
 import { useNavigate, useLocation } from "react-router-dom"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Colors } from "../../styles/Color"
 import { Typography } from "../../styles/Font"
 import Hamburger from "../../assets/Hamburger.svg"
 import Cross from "../../assets/Cross.svg"
 import profile from "../../assets/profile.svg"
+import { get } from "../../services/api"
 
 const navItem = [
     { label: "Dashboard", path: "/dashboard" },
@@ -14,10 +15,29 @@ const navItem = [
 ]
 
 const DashboardNavbar = () => {
+
     const navigate = useNavigate()
     const location = useLocation()
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [userProfile, setUserProfile] = useState(null)
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+
+                const response = await get("/user/me")
+                setUserProfile(response.data.profileImg)
+
+            } catch (error) {
+                console.log("Error", error)
+            }
+        }
+
+        fetchData()
+    }, [])
+
+
 
     const handleNav = (path) => {
         navigate(path)

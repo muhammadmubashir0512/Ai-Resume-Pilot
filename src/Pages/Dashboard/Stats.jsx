@@ -28,7 +28,7 @@ const Stats = () => {
                 setLoading(true)
 
                 const [userRes, scoreRes] = await Promise.all([
-                    get("/auth/me"),
+                    get("/user/me"),
                     get("/user/avgscore"),
                 ])
 
@@ -84,7 +84,7 @@ const Stats = () => {
                         className="text-[14px]"
                         style={{ color: Colors.text }}
                     >
-                        Fetching your application activity...
+                        Fetching your resumePilot activity...
                     </p>
                 </div>
 
