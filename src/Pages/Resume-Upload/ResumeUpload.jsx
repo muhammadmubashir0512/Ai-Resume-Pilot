@@ -23,8 +23,6 @@ const ResumeUpload = () => {
     const [resume, setResume] = useState(null)
     const [targetContext, setTargetContext] = useState({
         targetRole: "",
-        experience: "",
-        fullName: "",
         jobDescription: ""
     })
     const [loading, setLoading] = useState(false)
@@ -54,8 +52,6 @@ const ResumeUpload = () => {
             setResume(null)
             setTargetContext({
                 targetRole: "",
-                experience: "",
-                fullName: "",
                 jobDescription: ""
             })
             navigate(`/resume-Analyzer/result/${newJobId}`)

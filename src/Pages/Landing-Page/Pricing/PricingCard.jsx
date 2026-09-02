@@ -4,12 +4,35 @@ import { Typography } from "../../../styles/Font"
 import GlassCard from "../../../components/Layout/GlassEffect"
 import Button from "../../../components/Button"
 import { PricingData } from "./PricingCardData"
+import { useNavigate } from "react-router-dom"
+import { post } from "../../../services/api"
 
-const PricingCard = ({ className = "", onClick }) => {
+
+const PricingCard = ({ className = "", mode = "landing" }) => {
+    const navigate = useNavigate()
     return (
         <div className="grid grid-cols-1  lg:grid-cols-3 w-full px-0 md:px-45 gap-8">
             {
                 PricingData.map((card) => {
+
+                    const handleClick = async () => {
+                        if (mode === "landing") {
+                            return
+                        }
+                        const plan = (card.pricing.toLowerCase())
+                        if (plan === "free") {
+                            navigate("/dashboard")
+                            return
+                        } else {
+                            try {
+                                const response = await post("/checkout/stripe/payment", { plan: plan })
+                                window.location.href = response.data.url;
+                            } catch (error) {
+                                console.error(error || "Something went wrong")
+                            }
+                        }
+                    }
+
                     return (
                         <GlassCard key={card.id} className={`relative flex h-full flex-col cursor-pointer hover:transition-all hover:-translate-y-0.5 hover:ring-1 hover:ring-[#fff]/50 hover:bg-[#C0C1FF]/7 ${className}`} >
                             {card.popular && (
@@ -41,17 +64,19 @@ const PricingCard = ({ className = "", onClick }) => {
                             <div className="pt-6 w-full mt-auto">
                                 {card.title === "FREE" ? (
                                     <GlassCard padding="p-2">
-                                        <Button variant="" size="md" className="w-full flex text-white items-center cursor-pointer justify-center" onClick={onClick}>
+                                        <Button variant="" size="md" className="w-full flex text-white items-center cursor-pointer justify-center" onClick={handleClick}>
                                             {card.ButtonText}
                                         </Button>
                                     </GlassCard>
                                 ) : card.popular ? (
-                                    <Button variant="light" size="lg" rounded="rounded-xl" className="w-full p-2 flex text-white items-center cursor-pointer justify-center">
+                                    <Button variant="light" size="lg" rounded="rounded-xl" className="w-full p-2 flex text-white items-center cursor-pointer justify-center"
+                                        onClick={handleClick}>
                                         {card.ButtonText}
                                     </Button>
                                 ) :
                                     <GlassCard padding="p-2">
-                                        <Button variant="" size="md" className="w-full flex text-white items-center cursor-pointer justify-center">
+                                        <Button variant="" size="md" className="w-full flex text-white items-center cursor-pointer justify-center"
+                                            onClick={handleClick}>
                                             {card.ButtonText}
                                         </Button>
                                     </GlassCard>}

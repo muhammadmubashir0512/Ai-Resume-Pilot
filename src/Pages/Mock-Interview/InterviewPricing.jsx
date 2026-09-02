@@ -20,7 +20,7 @@ const InterviewPricing = () => {
                 </div>
 
                 {/* FeaturedCard List */}
-                <PricingCard className="" onClick={() => navigate("/Mock-Interview/Preference")} />
+                <PricingCard mode="interview" />
             </div>
         </PageWrapper>
     )

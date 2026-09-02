@@ -1,7 +1,8 @@
 export const PricingData = [
   {
     id: 1,
-    title: "FREE",
+    pricing: "free",
+    title: "Free",
     price: "$0",
     popular: false,
     ButtonText: "Get Started",
@@ -13,8 +14,9 @@ export const PricingData = [
   },
   {
     id: 2,
-    title: "Pro",
-    price: "$19",
+    pricing: "premium",
+    title: "Advanced",
+    price: "$9",
     popular: true,
     ButtonText: "Get Pro",
     benefits: [
@@ -26,8 +28,9 @@ export const PricingData = [
   },
   {
     id: 3,
-    title: "Career Plus",
-    price: "$49",
+    pricing: "pro",
+    title: "Pro",
+    price: "$19",
     popular: false,
     ButtonText: "Get Plus",
     benefits: [

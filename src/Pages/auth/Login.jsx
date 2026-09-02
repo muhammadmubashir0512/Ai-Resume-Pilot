@@ -91,7 +91,7 @@ const Login = () => {
                         </div>
 
                         {/* Full Name */}
-                        <div>
+                        {/* <div>
                             <label className="block text-[11px] font-semibold uppercase tracking-wide mb-1.5" style={{ color: Colors.text }}>
                                 Full Name
                             </label>
@@ -106,7 +106,7 @@ const Login = () => {
                             {errors.fullName && (
                                 <p className="text-red-400 text-xs mt-1">{errors.fullName.message}</p>
                             )}
-                        </div>
+                        </div> */}
 
                         {/* Email */}
                         <div>
