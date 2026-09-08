@@ -20,6 +20,7 @@ import OtpVerification from './Pages/auth/OTPVerify'
 import MockInterviewInProgress from './Pages/Mock-Interview/MockInterviewInprogress'
 import PaymentSuccess from './Pages/Subscription-Plan/paymentSuccessful'
 import PaymentCancelled from './Pages/Subscription-Plan/PaymentCancelled'
+import InterviewLive from './Pages/Mock-Interview/Mock_Interview_Audio'
 
 function App() {
 
@@ -137,6 +138,13 @@ function App() {
       element:
         <PageTransition>
           <Mock_Interview />
+        </PageTransition>
+    },
+    {
+      path: "/Mock-Interview/audio",
+      element:
+        <PageTransition>
+          <InterviewLive />
         </PageTransition>
     },
     {
