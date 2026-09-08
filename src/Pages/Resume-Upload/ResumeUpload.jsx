@@ -57,7 +57,7 @@ const ResumeUpload = () => {
             navigate(`/resume-Analyzer/result/${newJobId}`)
 
         } catch (error) {
-            console.error("Error....", error)
+            console.log("Error....", error)
             toast.error(error.message || "Something went wrong")
             setLoading(false)
         }

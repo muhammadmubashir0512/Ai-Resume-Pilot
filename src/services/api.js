@@ -5,6 +5,7 @@ const API = axios.create({
   withCredentials: true,
 });
 
+// Request Interceptor
 API.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("accessToken");
@@ -16,6 +17,29 @@ API.interceptors.request.use(
     return config;
   },
   (error) => Promise.reject(error),
+);
+
+// Response Interceptor
+API.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem("accessToken");
+      window.location.href = "/login";
+    }
+
+    const message =
+      error.response?.data?.message || error.message || "Something went wrong";
+
+    return Promise.reject({
+      message,
+      status: error.response?.status,
+      data: error.response?.data,
+    });
+  },
 );
 
 export const get = async (url, params = {}) => {

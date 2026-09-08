@@ -11,7 +11,6 @@ import google from "../../assets/google.png"
 import eyeIcon from "../../assets/eyeIcon.svg"
 import { useNavigate } from "react-router-dom"
 import toast, { Toaster } from "react-hot-toast"
-import { useState } from "react"
 import { post } from "../../services/api"
 
 const signupData = [

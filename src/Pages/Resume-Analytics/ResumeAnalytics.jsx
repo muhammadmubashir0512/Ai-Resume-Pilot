@@ -31,6 +31,9 @@ const ResumeAnalytics = () => {
         intervalRef.current = setInterval(async () => {
             try {
                 const response = await get(`/resume/analysis/${Id}`)
+
+                console.log("FULL RESPONSE:", response)
+                console.log("RESPONSE DATA:", response.data)
                 const statusData = response.data
                 missCountRef.current = 0
 
@@ -41,9 +44,9 @@ const ResumeAnalytics = () => {
                     clearInterval(intervalRef.current)
                     setPolling(false)
                 } else if (statusData.stage === "failed") {
-                    toast.error("Analysis failed, please try again")
                     clearInterval(intervalRef.current)
                     setPolling(false)
+                    alert(statusData.error)
                 }
             } catch (error) {
                 missCountRef.current += 1

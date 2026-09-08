@@ -15,6 +15,7 @@ import { toast } from 'react-hot-toast'
 import { get, put, post } from '../../services/api'
 import UpdatePassword from './UpdatePassword'
 import LogoutModal from './LogoutModal'
+import CurrentPlan from '../Subscription-Plan/CurrentPlan'
 
 const Account = () => {
 
@@ -289,6 +290,9 @@ const Account = () => {
 
                 <UpdatePassword />
 
+                <CurrentPlan />
+
+
 
                 <GlassCard>
 
@@ -327,6 +331,8 @@ const Account = () => {
                 </GlassCard>
 
             </div>
+
+
             <LogoutModal
                 isOpen={isOpen}
                 onClose={closeLogoutModal}

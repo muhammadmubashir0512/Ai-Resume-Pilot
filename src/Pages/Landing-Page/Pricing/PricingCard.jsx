@@ -21,7 +21,9 @@ const PricingCard = ({ className = "", mode = "landing" }) => {
                         }
                         const plan = (card.pricing.toLowerCase())
                         if (plan === "free") {
-                            navigate("/dashboard")
+                            setTimeout(() => {
+                                navigate("/dashboard")
+                            }, 500);
                             return
                         } else {
                             try {

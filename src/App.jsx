@@ -9,7 +9,7 @@ import Dashboard from './Pages/Dashboard/Dashboard'
 import PageTransition from './components/Layout/PageTransition'
 import ResumeUpload from './Pages/Resume-Upload/ResumeUpload'
 import ResumeAnalytics from './Pages/Resume-Analytics/ResumeAnalytics'
-import InterviewPricing from './Pages/Mock-Interview/InterviewPricing'
+import InterviewPricing from './Pages/Subscription-Plan/UpdateSubscription'
 import Mock_Interview from './Pages/Mock-Interview/Mock_Interview'
 import Mock_Interview_Preference from './Pages/Mock-Interview/Mock_Interview_Preference'
 import InterviewResult from './Pages/Mock-Interview/InterviewResult'
@@ -18,6 +18,8 @@ import ImproveResume from './Pages/Improve-Resume/ImproveResume'
 import ImproveResult from './Pages/Improve-Resume/ImproveResult'
 import OtpVerification from './Pages/auth/OTPVerify'
 import MockInterviewInProgress from './Pages/Mock-Interview/MockInterviewInprogress'
+import PaymentSuccess from './Pages/Subscription-Plan/paymentSuccessful'
+import PaymentCancelled from './Pages/Subscription-Plan/PaymentCancelled'
 
 function App() {
 
@@ -103,7 +105,21 @@ function App() {
         </PageTransition>
     },
     {
-      path: "/Mock-Interview/pricing",
+      path: "/payment/success",
+      element:
+        <PageTransition>
+          <PaymentSuccess />
+        </PageTransition>
+    },
+    {
+      path: "/payment/cancel",
+      element:
+        <PageTransition>
+          <PaymentCancelled />
+        </PageTransition>
+    },
+    {
+      path: "/updateSubscription",
       element:
         <PageTransition>
           <InterviewPricing />

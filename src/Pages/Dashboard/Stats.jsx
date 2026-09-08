@@ -33,9 +33,9 @@ const Stats = () => {
                 ])
 
                 setUserName(userRes.data.fullName)
-                setResumeScore(scoreRes.data[0].averageAtsScore ?? 0)
-                setSkillGap(scoreRes.data[0].skillGapPercent ?? 0)
-                setTotalResume(scoreRes.data[0].totalResumes ?? 0)
+                setResumeScore(scoreRes.data.averageAtsScore ?? 0)
+                setSkillGap(scoreRes.data.skillGapPercent ?? 0)
+                setTotalResume(scoreRes.data.totalResumes ?? 0)
 
             } catch (error) {
                 console.log("Error", error)
