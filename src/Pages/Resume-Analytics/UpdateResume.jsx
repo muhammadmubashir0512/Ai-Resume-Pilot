@@ -6,6 +6,8 @@ import Button from '../../components/Button'
 const ResumeUpdate = ({ jobId }) => {
 
     const navigate = useNavigate()
+    const resumeId = jobId
+    console.log("/////////////////////////", resumeId)
 
     return (
         <GlassCard padding='p-8'>
@@ -26,9 +28,9 @@ const ResumeUpdate = ({ jobId }) => {
                         variant="glass"
                         size="normal"
                         className="cursor-pointer justify-center text-center w-full sm:w-auto"
-                        onClick={() => navigate("/dashboard")}
+                        onClick={() => navigate(`/Mock-Interview/audio/${resumeId}`)}
                     >
-                        Back To Dashboard
+                        Start Mock Interview
                     </Button>
                 </div>
             </div>

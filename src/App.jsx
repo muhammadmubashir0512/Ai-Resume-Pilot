@@ -141,7 +141,7 @@ function App() {
         </PageTransition>
     },
     {
-      path: "/Mock-Interview/audio",
+      path: "/Mock-Interview/audio/:resumeId",
       element:
         <PageTransition>
           <InterviewLive />

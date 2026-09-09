@@ -10,7 +10,7 @@ import { get } from "../../services/api"
 const navItem = [
     { label: "Dashboard", path: "/dashboard" },
     { label: "Resume Analyzer", path: "/resume-Analyzer" },
-    { label: "Mock Interview", path: "/Mock-Interview", navigateTo: "/Mock-Interview/audio" },
+    { label: "Mock Interview", path: "/Mock-Interview", navigateTo: "/Mock-Interview/audio/:resumeId" },
     { label: "Account Setting", path: "/Account-Setting" },
 ]
 
