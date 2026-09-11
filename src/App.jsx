@@ -10,7 +10,6 @@ import PageTransition from './components/Layout/PageTransition'
 import ResumeUpload from './Pages/Resume-Upload/ResumeUpload'
 import ResumeAnalytics from './Pages/Resume-Analytics/ResumeAnalytics'
 import InterviewPricing from './Pages/Subscription-Plan/UpdateSubscription'
-import Mock_Interview from './Pages/Mock-Interview/Mock_Interview'
 import Mock_Interview_Preference from './Pages/Mock-Interview/Mock_Interview_Preference'
 import InterviewResult from './Pages/Mock-Interview/InterviewResult'
 import Account from './Pages/Account-Settings/Account'
@@ -134,14 +133,7 @@ function App() {
         </PageTransition>
     },
     {
-      path: "/Mock-Interview",
-      element:
-        <PageTransition>
-          <Mock_Interview />
-        </PageTransition>
-    },
-    {
-      path: "/Mock-Interview/audio/:resumeId",
+      path: "/Mock-Interview/audio",
       element:
         <PageTransition>
           <InterviewLive />

@@ -11,6 +11,7 @@ const InterviewLive = () => {
     const {
         secondsLeft,
         aiSpeaking,
+        endInterview,
         listening,
         question,
         questionIndex,
@@ -24,6 +25,11 @@ const InterviewLive = () => {
     const minutes = String(Math.floor(secondsLeft / 60)).padStart(2, '0')
     const seconds = String(secondsLeft % 60).padStart(2, '0')
     const isLowTime = secondsLeft <= 30
+
+    const stopInterview = () => {
+        endInterview()
+        navigate('/dashboard')
+    }
 
     if (error) {
         return (
@@ -65,7 +71,7 @@ const InterviewLive = () => {
                 </div>
 
                 <button
-                    onClick={() => navigate('/dashboard')}
+                    onClick={() => stopInterview()}
                     className="flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full border cursor-pointer transition-all duration-200 hover:opacity-80"
                     style={{ backgroundColor: '#FFAAA810', borderColor: '#FFAAA830' }}
                 >

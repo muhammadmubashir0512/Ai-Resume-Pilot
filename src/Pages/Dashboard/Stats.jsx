@@ -20,6 +20,8 @@ const Stats = () => {
     const [resumeScore, setResumeScore] = useState(0)
     const [totalResume, setTotalResume] = useState(0)
     const [skillGap, setSkillGap] = useState(0)
+    const [interviewReadiness, setInterviewReadiness] = useState(0)
+    const [totalMockInterviews, setTotalMockInterviews] = useState(0)
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -33,9 +35,26 @@ const Stats = () => {
                 ])
 
                 setUserName(userRes.data.fullName)
-                setResumeScore(scoreRes.data.averageAtsScore ?? 0)
-                setSkillGap(scoreRes.data.skillGapPercent ?? 0)
-                setTotalResume(scoreRes.data.totalResumes ?? 0)
+
+                setResumeScore(
+                    scoreRes.data.averageAtsScore ?? 0
+                )
+
+                setSkillGap(
+                    scoreRes.data.skillGapPercent ?? 0
+                )
+
+                setTotalResume(
+                    scoreRes.data.totalResumes ?? 0
+                )
+
+                setInterviewReadiness(
+                    scoreRes.data.interviewReadiness ?? 0
+                )
+
+                setTotalMockInterviews(
+                    scoreRes.data.totalMockInterviews ?? 0
+                )
 
             } catch (error) {
                 console.log("Error", error)
@@ -49,10 +68,35 @@ const Stats = () => {
     }, [])
 
     const statsCard = [
-        { id: 1, icon: CV, label: "RESUME SCORE", points: `${resumeScore}%`, body: `Total Uploaded Resume: ${totalResume}` },
-        { id: 2, icon: speak, label: "INTERVIEW READINESS", points: `0%` },
-        { id: 3, icon: Text, label: "MOCK INTERVIEWS", points: `0`, body: "No interviews yet" },
-        { id: 4, icon: danger, label: "SKILL GAPS FOUND", points: `${skillGap}%`, body: "Skills Missing" },
+        {
+            id: 1,
+            icon: CV,
+            label: "RESUME SCORE",
+            points: `${resumeScore}%`,
+            body: `Total Uploaded Resume: ${totalResume}`
+        },
+        {
+            id: 2,
+            icon: speak,
+            label: "INTERVIEW READINESS",
+            points: `${interviewReadiness}%`
+        },
+        {
+            id: 3,
+            icon: Text,
+            label: "MOCK INTERVIEWS",
+            points: `${totalMockInterviews}`,
+            body: totalMockInterviews > 0
+                ? "Completed interviews"
+                : "No interviews yet"
+        },
+        {
+            id: 4,
+            icon: danger,
+            label: "SKILL GAPS FOUND",
+            points: `${skillGap}%`,
+            body: "Skills Missing"
+        },
     ]
 
     if (loading) {
@@ -60,6 +104,7 @@ const Stats = () => {
             <div className="min-h-[70vh] flex flex-col justify-center items-center gap-5">
 
                 <div className="relative flex items-center justify-center">
+
                     <div
                         className="w-14 h-14 rounded-full border-4 border-white/10 border-t-[#4CD7F6] animate-spin"
                     />
@@ -70,9 +115,11 @@ const Stats = () => {
                             backgroundColor: `${Colors.progressCircle}10`
                         }}
                     />
+
                 </div>
 
                 <div className="flex flex-col items-center gap-1 text-center">
+
                     <p
                         className="text-[18px] font-semibold"
                         style={{ color: Colors.textbody }}
@@ -86,66 +133,156 @@ const Stats = () => {
                     >
                         Fetching your resumePilot activity...
                     </p>
+
                 </div>
 
             </div>
         )
     }
 
-
     return (
         <div className='flex flex-col gap-6 md:gap-12'>
 
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center justify-between'>
-                {/* Welcome Note */}
+
                 <div className='flex flex-col gap-2'>
-                    <p className={`${Typography.responsiveHeading}`} style={{ color: Colors.textbody }}>Welcome, {userName}</p>
-                    <p className={`${Typography.small} md:${Typography.body}`} style={{ color: Colors.text }}>Track your progress, sharpen your resume, and prepare for your next
-                        big opportunity — all in one place.</p>
+
+                    <p
+                        className={`${Typography.responsiveHeading}`}
+                        style={{ color: Colors.textbody }}
+                    >
+                        Welcome, {userName}
+                    </p>
+
+                    <p
+                        className={`${Typography.small} md:${Typography.body}`}
+                        style={{ color: Colors.text }}
+                    >
+                        Track your progress, sharpen your resume, and prepare for your next
+                        big opportunity — all in one place.
+                    </p>
+
                 </div>
 
-                {/* Resume and Interview Buttons */}
                 <div className='flex flex-row gap-[16px] flex-wrap justify-center md:justify-end'>
+
                     <div>
-                        <Button variant="secondary" size="normal" className="cursor-pointer" onClick={() => navigate("/resume-Analyzer")}> <img src={upload} alt="" className='h-[16px] w-[16px]' /> Upload Resume</Button>
+                        <Button
+                            variant="secondary"
+                            size="normal"
+                            className="cursor-pointer"
+                            onClick={() => navigate("/resume-Analyzer")}
+                        >
+                            <img
+                                src={upload}
+                                alt=""
+                                className='h-[16px] w-[16px]'
+                            />
+
+                            Upload Resume
+                        </Button>
                     </div>
-                    <Button variant="glass" rounded="rounded-lg" size="normal" className="text-white font-normal cursor-pointer " onClick={() => navigate("/Mock-Interview/inprogress")}><img src={interview} alt="" className='h-[16px] w-[16px]' /> Start Mock Interview</Button>
+
+                    <Button
+                        variant="glass"
+                        rounded="rounded-lg"
+                        size="normal"
+                        className="text-white font-normal cursor-pointer"
+                        onClick={() => navigate("/Mock-Interview/inprogress")}
+                    >
+                        <img
+                            src={interview}
+                            alt=""
+                            className='h-[16px] w-[16px]'
+                        />
+
+                        Start Mock Interview
+                    </Button>
+
                 </div>
+
             </div>
 
-            {/* Stats Card */}
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
+
                 {
                     statsCard.map((stats) => {
+
                         return (
+
                             <GlassCard key={stats.id}>
+
                                 <div className='flex flex-col'>
+
                                     <div className='flex flex-row justify-between items-center pb-4'>
-                                        <p className={`${Typography.subheading}`} style={{ color: Colors.textbody }}>{stats.label}</p>
-                                        <img src={stats.icon} alt="" className='w-[20px] h-[20px]' />
+
+                                        <p
+                                            className={`${Typography.subheading}`}
+                                            style={{ color: Colors.textbody }}
+                                        >
+                                            {stats.label}
+                                        </p>
+
+                                        <img
+                                            src={stats.icon}
+                                            alt=""
+                                            className='w-[20px] h-[20px]'
+                                        />
+
                                     </div>
 
                                     <div className='flex flex-col gap-2'>
-                                        <p className={`${Typography.responsiveHeading}`} style={{ color: Colors.textbody }}>{stats.points}</p>
+
+                                        <p
+                                            className={`${Typography.responsiveHeading}`}
+                                            style={{ color: Colors.textbody }}
+                                        >
+                                            {stats.points}
+                                        </p>
+
                                         {
                                             stats.body ? (
+
                                                 <div>
-                                                    <p className={`${Typography.small}`} style={{ color: Colors.text }}>{stats.body}</p>
+
+                                                    <p
+                                                        className={`${Typography.small}`}
+                                                        style={{ color: Colors.text }}
+                                                    >
+                                                        {stats.body}
+                                                    </p>
+
                                                 </div>
+
                                             ) : (
+
                                                 <div className='h-[6px] w-full rounded-full bg-[#171F33]'>
-                                                    <div className={`h-[6px] rounded-full`} style={{ width: `${stats.points}`, backgroundColor: Colors.light }}>
-                                                    </div>
+
+                                                    <div
+                                                        className='h-[6px] rounded-full'
+                                                        style={{
+                                                            width: `${stats.points}`,
+                                                            backgroundColor: Colors.light
+                                                        }}
+                                                    />
+
                                                 </div>
+
                                             )
                                         }
+
                                     </div>
+
                                 </div>
+
                             </GlassCard>
+
                         )
                     })
                 }
+
             </div>
+
         </div>
     )
 }

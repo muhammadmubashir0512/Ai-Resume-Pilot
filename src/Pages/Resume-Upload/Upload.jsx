@@ -173,7 +173,7 @@ const Upload = ({ resume, onResumeSelect }) => {
                                 <div className="flex flex-col items-center gap-2 md:gap-5 min-w-0">
 
                                     <p
-                                        className="text-sm sm:text-base font-semibold truncate text-wrap text-center"
+                                        className="text-[8px] sm:text-base font-semibold truncate text-wrap text-center"
                                         style={{ color: Colors.textbody }}
                                     >
                                         {resume.name}

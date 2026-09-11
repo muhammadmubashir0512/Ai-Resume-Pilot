@@ -1,11 +1,20 @@
 import { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import api from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 const SESSION_LENGTH = 8 * 60;
 
 export const useInterviewSession = () => {
-  const { resumeId } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const resumeId = location.state?.resumeId;
+  const targetRole = location.state?.targetRole;
+  const difficulty = location.state?.difficulty;
+  const interviewType = location.state?.interviewType;
+  const language = location.state?.language || "English";
+  const resume = location.state?.resume;
 
   const [secondsLeft, setSecondsLeft] = useState(SESSION_LENGTH);
   const [aiSpeaking, setAiSpeaking] = useState(false);
@@ -14,7 +23,7 @@ export const useInterviewSession = () => {
   const [interviewId, setInterviewId] = useState(null);
   const [question, setQuestion] = useState("");
   const [questionIndex, setQuestionIndex] = useState(0);
-  const [totalQuestions, setTotalQuestions] = useState(10);
+  const [totalQuestions, setTotalQuestions] = useState(5);
 
   const [meta, setMeta] = useState({
     role: "",
@@ -29,6 +38,9 @@ export const useInterviewSession = () => {
   const audioRef = useRef(null);
   const interviewStartedRef = useRef(false);
 
+  const mediaRecorderRef = useRef(null);
+  const audioChunksRef = useRef([]);
+
   useEffect(() => {
     if (secondsLeft <= 0) return;
 
@@ -40,12 +52,10 @@ export const useInterviewSession = () => {
   }, [secondsLeft]);
 
   useEffect(() => {
-    if (!resumeId) {
-      setError("No resume selected. Please go back and select a resume.");
-      return;
-    }
+    if (interviewStartedRef.current) return;
 
-    if (interviewStartedRef.current) {
+    if (!resumeId && !resume) {
+      setError("No resume selected. Please go back and select a resume.");
       return;
     }
 
@@ -60,11 +70,31 @@ export const useInterviewSession = () => {
         audioRef.current = null;
       }
     };
-  }, [resumeId]);
+  }, [resumeId, resume]);
 
   const startInterview = async () => {
     try {
-      const response = await api.post(`/interview/start/${resumeId}`);
+      const formData = new FormData();
+
+      if (resumeId) {
+        formData.append("resumeId", resumeId);
+      } else {
+        if (!resume) {
+          throw new Error("Resume is required");
+        }
+
+        if (!targetRole) {
+          throw new Error("Target role is required");
+        }
+
+        formData.append("resume", resume);
+        formData.append("targetRole", targetRole);
+        formData.append("difficulty", difficulty || "easy");
+        formData.append("interviewType", interviewType || "behavioral");
+        formData.append("language", language || "English");
+      }
+
+      const response = await api.post("/interview/start", formData);
 
       const interview = response.data.data;
 
@@ -81,8 +111,34 @@ export const useInterviewSession = () => {
 
       await waitForFirstQuestion(interview._id);
     } catch (err) {
-      setError("Could not start the interview. Please try again.");
+      console.log("Start interview error:", err);
+      setError(
+        err?.response?.data?.message ||
+          err?.message ||
+          "Could not start the interview. Please try again.",
+      );
     }
+  };
+
+  const endInterview = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current = null;
+    }
+
+    if (mediaRecorderRef.current?.state === "recording") {
+      mediaRecorderRef.current.stop();
+    }
+
+    if (mediaRecorderRef.current?.stream) {
+      mediaRecorderRef.current.stream
+        .getTracks()
+        .forEach((track) => track.stop());
+    }
+
+    setAiSpeaking(false);
+    setListening(false);
   };
 
   const waitForFirstQuestion = async (id) => {
@@ -116,20 +172,21 @@ export const useInterviewSession = () => {
 
           return;
         }
-
         if (statusData.status === "failed") {
-          throw new Error(
-            statusData.error || "Interview question generation failed",
-          );
+          const errorMessage =
+            statusData.error || "Interview question generation failed";
+
+          alert(errorMessage);
+          endInterview();
+          navigate("/Mock-Interview/preference");
+
+          return;
         }
 
         await new Promise((resolve) => setTimeout(resolve, 1000));
       } catch (err) {
-        if (attempt === maxAttempts - 1) {
-          throw err;
-        }
-
         await new Promise((resolve) => setTimeout(resolve, 1000));
+        throw err;
       }
     }
 
@@ -189,32 +246,32 @@ export const useInterviewSession = () => {
     }
   };
 
-  // ANSWER RECORDING + SUBMISSION FLOW — DISABLED
-  // Backend endpoint for audio-answer submission is not built yet.
-  // Uncomment this entire block once /interview/answer/:interviewId (audio-based) is ready.
-
-  const mediaRecorderRef = useRef(null);
-  const audioChunksRef = useRef([]);
-
   const startRecording = async () => {
     try {
       if (aiSpeaking) return;
 
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: true,
+      });
+
       const mediaRecorder = new MediaRecorder(stream);
 
       audioChunksRef.current = [];
       mediaRecorderRef.current = mediaRecorder;
 
       mediaRecorder.ondataavailable = (event) => {
-        if (event.data.size > 0) audioChunksRef.current.push(event.data);
+        if (event.data.size > 0) {
+          audioChunksRef.current.push(event.data);
+        }
       };
 
       mediaRecorder.onstop = async () => {
         stream.getTracks().forEach((track) => track.stop());
+
         const audioBlob = new Blob(audioChunksRef.current, {
           type: mediaRecorder.mimeType || "audio/webm",
         });
+
         await submitAnswer(audioBlob);
       };
 
@@ -238,6 +295,7 @@ export const useInterviewSession = () => {
       setAiSpeaking(true);
 
       const formData = new FormData();
+
       formData.append("audio", audioBlob, "answer.webm");
       formData.append("currentQuestion", questionIndex);
 
@@ -245,28 +303,54 @@ export const useInterviewSession = () => {
         `/interview/answer/${interviewId}`,
         formData,
       );
+
       const result = response.data.data;
 
       setTranscript((prev) => [
         ...prev,
-        { speaker: "user", text: result.answer || "Answer recorded" },
+        {
+          speaker: "user",
+          text: result.answer || "Answer recorded",
+        },
       ]);
 
       if (result.interviewCompleted) {
         setAiSpeaking(false);
+
+        navigate("/Mock-Interview/result", {
+          state: {
+            interviewResult: result.parsedResult.finalEvaluation,
+            interviewInfo: {
+              jobTitle: meta.role,
+              interviewType: meta.type,
+              difficulty: meta.difficulty,
+              language: meta.language,
+            },
+          },
+        });
+
         return;
       }
 
       const nextQuestion = result.parsedResult?.nextQuestion;
+
       if (!nextQuestion) {
         setAiSpeaking(false);
         return;
       }
 
       const nextQuestionIndex = questionIndex + 1;
+
       setQuestion(nextQuestion);
       setQuestionIndex(nextQuestionIndex);
-      setTranscript((prev) => [...prev, { speaker: "ai", text: nextQuestion }]);
+
+      setTranscript((prev) => [
+        ...prev,
+        {
+          speaker: "ai",
+          text: nextQuestion,
+        },
+      ]);
 
       await speakQuestion(nextQuestion);
     } catch (err) {
@@ -278,6 +362,7 @@ export const useInterviewSession = () => {
 
   const handleMicToggle = () => {
     if (aiSpeaking) return;
+
     if (listening) {
       stopRecording();
     } else {
@@ -288,6 +373,7 @@ export const useInterviewSession = () => {
   return {
     secondsLeft,
     aiSpeaking,
+    endInterview,
     listening,
     question,
     questionIndex,

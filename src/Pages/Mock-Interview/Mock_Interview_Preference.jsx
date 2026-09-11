@@ -10,8 +10,10 @@ import hard from "../../assets/hard.svg"
 import tech from "../../assets/tech.svg"
 import speak from "../../assets/Speak.svg"
 import Button from '../../components/Button'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { toast, Toaster } from 'react-hot-toast'
+import Upload from '../Resume-Upload/Upload'
+import Tips from '../Resume-Upload/Tips'
 
 const difficultyData = [
     { id: 1, icon: easy, label: "Easy", body: "Fundamental questions" },
@@ -21,31 +23,46 @@ const difficultyData = [
 
 const interviewType = [
     { id: 1, icon: tech, label: "Technical", body: "Technical skills & problem solving" },
-    { id: 1, icon: speak, label: "Behavioral", body: "Communication & workplace scenarios" },
+    { id: 2, icon: speak, label: "Behavioral", body: "Communication & workplace scenarios" },
 ]
 
 const Mock_Interview_Preference = () => {
 
+    const location = useLocation()
+    const navigate = useNavigate()
+
+    const resumeId = location.state?.resumeId
+
     const [targetRole, setTargetRole] = useState("")
+    const [resume, setResume] = useState(null)
     const [difficultyLevel, setDifficultyLevel] = useState("")
     const [interview, setInterviewType] = useState("")
-    const navigate = useNavigate()
 
     const onSubmit = () => {
 
-        if (targetRole && difficultyLevel && interview) {
-
-            console.log("Target job...", targetRole)
-            console.log("Difficulty level...", difficultyLevel)
-            console.log("Interview.....", interview)
-            setTargetRole("")
-            setDifficultyLevel("")
-            setInterviewType("")
-
-            navigate("/Mock-Interview")
-        } else {
+        if (!targetRole || !difficultyLevel || !interview) {
             toast.error("Please fill required data for Mock-Interview")
+            return
         }
+
+        if (!resumeId && !resume) {
+            toast.error("Please upload your resume")
+            return
+        }
+
+        const interviewData = {
+            targetRole: targetRole.trim(),
+            difficulty: difficultyLevel.toLowerCase(),
+            interviewType: interview.toLowerCase(),
+        }
+
+        navigate("/Mock-Interview/audio", {
+            state: {
+                resumeId,
+                resume,
+                ...interviewData,
+            },
+        })
     }
 
     return (
@@ -53,24 +70,49 @@ const Mock_Interview_Preference = () => {
             <Toaster />
             <DashboardNavbar />
 
-            {/* Title */}
             <div className='flex flex-col gap-2 justify-center items-center'>
-                <p className={`${Typography.responsiveHeading} text-center`} style={{ color: Colors.textbody }}>Prepare for Your Mock
-                    Interview</p>
-                <p className={`${Typography.small} md:${Typography.body} max-w-[572px] w-auto text-center`} style={{ color: Colors.text }}>Set your interview preferences and get a personalized AI-powered interview
-                    experience.</p>
+                <p
+                    className={`${Typography.responsiveHeading} text-center`}
+                    style={{ color: Colors.textbody }}
+                >
+                    Prepare for Your Mock Interview
+                </p>
+
+                <p
+                    className={`${Typography.small} md:${Typography.body} max-w-[572px] w-auto text-center`}
+                    style={{ color: Colors.text }}
+                >
+                    Set your interview preferences and get a personalized AI-powered interview
+                    experience.
+                </p>
             </div>
 
-            <div className='m-0 md:m-16 px-0 md:px-30 lg:px-42'>
+            <div className='m-0 md:m-16 px-0 md:px-12'>
+
+                <div className='mb-9'>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <Upload
+                            resume={resume}
+                            onResumeSelect={setResume}
+                        />
+
+                        <div className='hidden md:block'>
+                            <Tips />
+                        </div>
+                    </div>
+                </div>
 
                 <GlassCard>
-                    <div className='flex flex-col gap-6 md:gap-10 '>
+                    <div className='flex flex-col gap-6 md:gap-10'>
 
-                        {/* Target Role */}
                         <div>
-                            <label className="block text-[12px] font-semibold uppercase tracking-wide mb-2" style={{ color: Colors.text }}>
+                            <label
+                                className="block text-[12px] font-semibold uppercase tracking-wide mb-2"
+                                style={{ color: Colors.text }}
+                            >
                                 Target Role
                             </label>
+
                             <input
                                 type="text"
                                 value={targetRole}
@@ -80,96 +122,152 @@ const Mock_Interview_Preference = () => {
                             />
                         </div>
 
-                        {/* Select Difficulty Level */}
                         <div className='flex flex-col gap-3'>
 
-                            <p className="block text-[12px] font-semibold uppercase tracking-wide mb-2" style={{ color: Colors.text }}>
+                            <p
+                                className="block text-[12px] font-semibold uppercase tracking-wide mb-2"
+                                style={{ color: Colors.text }}
+                            >
                                 DIFFICULTY LEVEL
                             </p>
 
                             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
 
-                                {
-                                    difficultyData.map((level) => {
-                                        return (
+                                {difficultyData.map((level) => (
+                                    <GlassCard
+                                        key={level.id}
+                                        padding='p-0'
+                                    >
+                                        <div
+                                            className={`p-3 rounded-2xl h-full cursor-pointer ${difficultyLevel === level.label
+                                                ? 'bg-[#03B5D3]/10 border border-[#03B5D3] shadow-md shadow-[#03B5D3]/10'
+                                                : ''
+                                                }`}
+                                            onClick={() => setDifficultyLevel(level.label)}
+                                        >
 
-                                            <GlassCard padding='p-0'>
-                                                <div key={level.id} className={` p-3 rounded-2xl h-full cursor-pointer ${difficultyLevel === level.label ? 'bg-[#03B5D3]/10 border border-[#03B5D3] shadow:md shadow-[#03B5D3]/60' : ''}`} onClick={() => setDifficultyLevel(level.label)}>
+                                            <div className='flex flex-col gap-3'>
 
-                                                    <div className={`flex flex-col gap-3`}>
+                                                <div className='flex flex-row gap-2 items-center'>
 
-                                                        <div className='flex flex-row gap-2 items-center'>
+                                                    <img
+                                                        src={level.icon}
+                                                        alt=""
+                                                        className='h-[20px] w-[20px]'
+                                                    />
 
-                                                            <img src={level.icon} alt="" className='h-[20px] w-[20px]' />
-                                                            <p className={`${Typography.subheading}`} style={{ color: Colors.textbody }}>{level.label}</p>
-
-                                                        </div>
-
-                                                        <p className={`${Typography.small}`} style={{ color: Colors.text }}>{level.body}</p>
-
-                                                    </div>
+                                                    <p
+                                                        className={`${Typography.subheading}`}
+                                                        style={{ color: Colors.textbody }}
+                                                    >
+                                                        {level.label}
+                                                    </p>
 
                                                 </div>
-                                            </GlassCard>
 
-                                        )
-                                    })
-                                }
+                                                <p
+                                                    className={`${Typography.small}`}
+                                                    style={{ color: Colors.text }}
+                                                >
+                                                    {level.body}
+                                                </p>
+
+                                            </div>
+
+                                        </div>
+                                    </GlassCard>
+                                ))}
 
                             </div>
 
                         </div>
 
-                        {/* Select Interview Type */}
                         <div className='flex flex-col gap-3'>
 
-                            <p className="block text-[12px] font-semibold uppercase tracking-wide mb-2" style={{ color: Colors.text }}>
+                            <p
+                                className="block text-[12px] font-semibold uppercase tracking-wide mb-2"
+                                style={{ color: Colors.text }}
+                            >
                                 INTERVIEW TYPE
                             </p>
 
                             <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
 
-                                {
-                                    interviewType.map((type) => {
-                                        return (
+                                {interviewType.map((type) => (
+                                    <GlassCard
+                                        key={type.id}
+                                        padding='p-0'
+                                    >
+                                        <div
+                                            className={`p-3 rounded-2xl h-full cursor-pointer ${interview === type.label
+                                                ? 'bg-[#03B5D3]/10 border border-[#03B5D3] shadow-md shadow-[#03B5D3]/10'
+                                                : ''
+                                                }`}
+                                            onClick={() => setInterviewType(type.label)}
+                                        >
 
-                                            <GlassCard padding='p-0'>
-                                                <div key={type.id} className={` p-3 rounded-2xl h-full cursor-pointer ${interview === type.label ? 'bg-[#03B5D3]/10 border border-[#03B5D3] shadow:md shadow-[#03B5D3]/60' : ''}`} onClick={() => setInterviewType(type.label)}>
+                                            <div className='flex flex-col gap-3'>
 
-                                                    <div className={`flex flex-col gap-3`}>
+                                                <div className='flex flex-row gap-2 items-center'>
 
-                                                        <div className='flex flex-row gap-2 items-center'>
+                                                    <img
+                                                        src={type.icon}
+                                                        alt=""
+                                                        className='h-[20px] w-[20px]'
+                                                    />
 
-                                                            <img src={type.icon} alt="" className='h-[20px] w-[20px]' />
-                                                            <p className={`${Typography.subheading}`} style={{ color: Colors.textbody }}>{type.label}</p>
-
-                                                        </div>
-
-                                                        <p className={`${Typography.small}`} style={{ color: Colors.text }}>{type.body}</p>
-
-                                                    </div>
+                                                    <p
+                                                        className={`${Typography.subheading}`}
+                                                        style={{ color: Colors.textbody }}
+                                                    >
+                                                        {type.label}
+                                                    </p>
 
                                                 </div>
-                                            </GlassCard>
 
-                                        )
-                                    })
-                                }
+                                                <p
+                                                    className={`${Typography.small}`}
+                                                    style={{ color: Colors.text }}
+                                                >
+                                                    {type.body}
+                                                </p>
+
+                                            </div>
+
+                                        </div>
+                                    </GlassCard>
+                                ))}
 
                             </div>
 
                         </div>
 
-                        {/* navigation Button */}
                         <div className='flex flex-row gap-4 pt-[18px] justify-center items-center flex-wrap'>
-                            <Button variant="secondary" size="normal" className="cursor-pointer" onClick={() => onSubmit()}>
-                                <img src={speak} alt="" className='w-[20x] h-[20px]' />
+
+                            <Button
+                                variant="secondary"
+                                size="normal"
+                                className="cursor-pointer"
+                                onClick={onSubmit}
+                            >
+                                <img
+                                    src={speak}
+                                    alt=""
+                                    className='w-[20px] h-[20px]'
+                                />
+
                                 START MOCK INTERVIEW
                             </Button>
 
-                            <Button variant="glass" size="normal" className="cursor-pointer" onClick={() => navigate("/dashboard")}>
+                            <Button
+                                variant="glass"
+                                size="normal"
+                                className="cursor-pointer"
+                                onClick={() => navigate("/dashboard")}
+                            >
                                 Back To Dashboard
                             </Button>
+
                         </div>
 
                     </div>

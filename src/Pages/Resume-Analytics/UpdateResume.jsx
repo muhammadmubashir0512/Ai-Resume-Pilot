@@ -28,7 +28,11 @@ const ResumeUpdate = ({ jobId }) => {
                         variant="glass"
                         size="normal"
                         className="cursor-pointer justify-center text-center w-full sm:w-auto"
-                        onClick={() => navigate(`/Mock-Interview/audio/${resumeId}`)}
+                        onClick={() => navigate("/Mock-Interview/audio", {
+                            state: {
+                                resumeId: resumeId
+                            }
+                        })}
                     >
                         Start Mock Interview
                     </Button>
