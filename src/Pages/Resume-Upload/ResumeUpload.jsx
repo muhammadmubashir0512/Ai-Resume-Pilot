@@ -98,7 +98,7 @@ const ResumeUpload = () => {
             </div>
 
             <div className='m-0 md:m-16 px-0 md:px-12'>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid  gap-8">
                     <Upload
                         resume={resume}
                         onResumeSelect={setResume}
