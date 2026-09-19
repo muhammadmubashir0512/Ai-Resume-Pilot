@@ -188,7 +188,7 @@ const Stats = () => {
                         rounded="rounded-lg"
                         size="normal"
                         className="text-white font-normal cursor-pointer"
-                        onClick={() => navigate("/Mock-Interview/inprogress")}
+                        onClick={() => navigate("/Mock-Interview/preference")}
                     >
                         <img
                             src={interview}
