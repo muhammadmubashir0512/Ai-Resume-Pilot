@@ -8,7 +8,6 @@ import expert from "../../assets/Expert.svg"
 import optimize from "../../assets/Optimize.svg"
 import { useForm } from "react-hook-form"
 import google from "../../assets/google.png"
-import eyeIcon from "../../assets/eyeIcon.svg"
 import { useNavigate } from "react-router-dom"
 import toast from "react-hot-toast"
 import { post } from "../../services/api"
@@ -145,9 +144,7 @@ const Login = () => {
                                             required: "Password is required",
                                             minLength: { value: 6, message: "Minimum 6 characters" },
                                         })}
-                                    />
-                                    <img src={eyeIcon} alt="" className="h-4 w-4 absolute right-3 top-1/2 -translate-y-1/2 opacity-40 cursor-pointer" />
-                                </div>
+                                    /></div>
                                 {errors.password && (
                                     <p className="text-red-400 text-xs mt-1">{errors.password.message}</p>
                                 )}
