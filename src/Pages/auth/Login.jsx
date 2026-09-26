@@ -71,14 +71,14 @@ const Login = () => {
                     <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
 
                         {/* Signup with Google */}
-                        <GlassCard padding="p-3" rounded="rounded-lg" className="cursor-pointer hover:bg-white/5 transition-colors">
+                        {/* <GlassCard padding="p-3" rounded="rounded-lg" className="cursor-pointer hover:bg-white/5 transition-colors">
                             <div className="flex flex-row gap-2 items-center justify-center">
                                 <img src={google} alt="" className="w-[18px] h-[18px]" />
                                 <p className="text-sm font-medium" style={{ color: Colors.textbody }}>
                                     Log in with Google
                                 </p>
                             </div>
-                        </GlassCard>
+                        </GlassCard> */}
 
                         {/* Divider */}
                         <div className="flex flex-row gap-3 items-center justify-center">
