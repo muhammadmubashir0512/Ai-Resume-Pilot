@@ -142,7 +142,7 @@ const Login = () => {
                                         className="w-full text-white px-4 py-2.5 pr-10 rounded-lg text-sm bg-white/5 border border-white/10 placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[#4CD7F6]/50 focus:border-transparent transition-all duration-200"
                                         {...register("password", {
                                             required: "Password is required",
-                                            minLength: { value: 6, message: "Minimum 6 characters" },
+                                            minLength: { value: 8, message: "Minimum 8 characters" },
                                         })}
                                     /></div>
                                 {errors.password && (
