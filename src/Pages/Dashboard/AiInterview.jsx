@@ -6,7 +6,6 @@ import difficulty from "../../assets/difficulty.svg"
 import interview from "../../assets/interview.svg"
 import Button from '../../components/Button'
 import { useNavigate } from 'react-router-dom'
-import toast from 'react-hot-toast'
 import { get } from '../../services/api'
 
 const AiInterview = () => {
@@ -26,7 +25,6 @@ const AiInterview = () => {
 
             } catch (error) {
                 console.log("Error", error)
-                // toast.error(error.message || "Something went wrong")
             } finally {
                 setLoading(false)
             }
