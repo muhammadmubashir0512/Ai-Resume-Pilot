@@ -11,8 +11,12 @@ import { useResumeStore } from '../../Store/ResumeStore'
 import { get } from '../../services/api'
 import { toast } from 'react-hot-toast'
 import ResumeSummary from './ResumeSummary'
+import { useNavigate } from 'react-router-dom'
 
 const ResumeAnalytics = () => {
+
+    const navigate = useNavigate()
+
     const analysis = useResumeStore((state) => state.analysis)
     const setAnalysis = useResumeStore((state) => state.setAnalysis)
 
@@ -32,8 +36,6 @@ const ResumeAnalytics = () => {
             try {
                 const response = await get(`/resume/analysis/${Id}`)
 
-                console.log("FULL RESPONSE:", response)
-                console.log("RESPONSE DATA:", response.data)
                 const statusData = response.data
                 missCountRef.current = 0
 
@@ -47,6 +49,7 @@ const ResumeAnalytics = () => {
                     clearInterval(intervalRef.current)
                     setPolling(false)
                     alert(statusData.error)
+                    navigate('//resume-Analyzer')
                 }
             } catch (error) {
                 missCountRef.current += 1
