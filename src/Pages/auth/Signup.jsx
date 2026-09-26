@@ -29,13 +29,13 @@ const Signup = () => {
     } = useForm()
 
     const onSubmit = async (userData) => {
-        console.log("User Data...", userData)
 
         try {
             const response = await post("/auth/signup", userData)
 
-
             console.log("Logged in user data.....", response)
+
+
             localStorage.setItem("accessToken", response.data.accessToken);
 
             toast.success(response.message || "Signup Completed! Verification OTP send to your mail");
