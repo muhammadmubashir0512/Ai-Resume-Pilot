@@ -52,7 +52,6 @@ const Signup = () => {
     return (
         <div className="w-full min-h-screen grid grid-cols-1 lg:grid-cols-2" style={{ backgroundColor: Colors.primary }}>
 
-            <Toaster />
             {/* Left — Marketing Content */}
             <div className="hidden lg:flex relative flex-col gap-10 lg:gap-14 justify-center px-6 md:px-8 lg:px-12 py-12 bg-[#060E20] overflow-hidden">
                 <div className="flex flex-col gap-5 lg:gap-7">

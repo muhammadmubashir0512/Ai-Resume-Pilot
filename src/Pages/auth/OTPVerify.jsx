@@ -112,7 +112,6 @@ const OtpVerification = () => {
 
     return (
         <PageWrapper className="flex flex-col justify-center items-center min-h-screen w-full">
-            <Toaster />
 
             <div className="w-full max-w-[440px] px-4 sm:px-0 mx-auto">
 

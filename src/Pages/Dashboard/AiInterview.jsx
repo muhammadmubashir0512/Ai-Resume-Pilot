@@ -26,7 +26,7 @@ const AiInterview = () => {
 
             } catch (error) {
                 console.log("Error", error)
-                toast.error(error.message || "Something went wrong")
+                // toast.error(error.message || "Something went wrong")
             } finally {
                 setLoading(false)
             }
