@@ -275,7 +275,7 @@ const AiInterview = () => {
                             variant="secondary"
                             size="normal"
                             className="cursor-pointer"
-                            onClick={() => navigate("/Mock-Interview/Preference")}
+                            onClick={() => navigate("/Mock-Interview/inprogress")}
                         >
                             Start Mock Interview
                         </Button>
