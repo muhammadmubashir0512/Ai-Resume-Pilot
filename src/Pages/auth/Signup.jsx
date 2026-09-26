@@ -203,6 +203,9 @@ const Signup = () => {
                                     <input
                                         type="password"
                                         placeholder="••••••••"
+                                        autoComplete="new-password"
+                                        readOnly
+                                        onFocus={(e) => e.target.removeAttribute('readonly')}
                                         className="w-full text-white px-4 py-2.5 pr-10 rounded-lg text-sm bg-white/5 border border-white/10 placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[#4CD7F6]/50 focus:border-transparent transition-all duration-200"
                                         {...register("password", {
                                             required: "Password is required",
