@@ -33,8 +33,6 @@ const Signup = () => {
         try {
             const response = await post("/auth/signup", userData)
 
-            console.log("Logged in user data.....", response)
-
 
             localStorage.setItem("accessToken", response.data.accessToken);
 

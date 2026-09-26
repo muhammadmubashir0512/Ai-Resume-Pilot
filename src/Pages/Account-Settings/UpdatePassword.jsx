@@ -102,7 +102,7 @@ const UpdatePassword = () => {
                                 placeholder="••••••••"
                                 autoComplete="new-password"
                                 readOnly
-                                onFocus={(e) => e.target.removeAttribute('readonly')}
+                                // onFocus={(e) => e.target.removeAttribute('readonly')}
                                 className="
                         w-full
                         text-white

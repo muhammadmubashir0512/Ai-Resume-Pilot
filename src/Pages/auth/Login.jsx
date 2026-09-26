@@ -33,7 +33,6 @@ const Login = () => {
         try {
             const response = await post("/auth/login", userData)
 
-            console.log("Logged in user data.....", response)
             localStorage.setItem("accessToken", response.data.accessToken);
 
             toast.success(response.message || "User Loggedin");
