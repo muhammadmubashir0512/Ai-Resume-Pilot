@@ -100,9 +100,9 @@ const UpdatePassword = () => {
                                 value={currentPassword}
                                 onChange={(e) => setCurrentPassword(e.target.value)}
                                 placeholder="••••••••"
-                                autoComplete="new-password"
-                                // readOnly
-                                // onFocus={(e) => e.target.removeAttribute('readonly')}
+                                autoComplete="off"
+                                readOnly
+                                onFocus={(e) => e.target.removeAttribute('readonly')}
                                 className="
                         w-full
                         text-white
