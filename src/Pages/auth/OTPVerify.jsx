@@ -98,7 +98,7 @@ const OtpVerification = () => {
 
         setResending(true)
         try {
-            await post('/auth/signup', { email })
+            await post('/auth/resend-otp', { email })
             toast.success('A new code has been sent')
             setSecondsLeft(RESEND_SECONDS)
             setOtp(Array(OTP_LENGTH).fill(''))
