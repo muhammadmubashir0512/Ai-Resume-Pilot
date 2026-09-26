@@ -31,7 +31,7 @@ export const HeroSection = () => {
                     <div>
                         <Button variant="secondary" size="normal" className="cursor-pointer" onClick={() => navigate("/login")}>Start Free Analysis <img src={Arrow} alt="" className='h-[16px] w-[16px]' /></Button>
                     </div>
-                    <Button variant="glass" rounded="rounded-lg" size="normal" className="text-white font-normal cursor-pointer " onClick={() => navigate("/pricing")}>Try Mock Interview</Button>
+                    <Button variant="glass" rounded="rounded-lg" size="normal" className="text-white font-normal cursor-pointer " onClick={() => navigate("/login")}>Try Mock Interview</Button>
                 </div>
             </div>
 
